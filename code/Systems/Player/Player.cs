@@ -168,20 +168,8 @@ public partial class Player : AnimatedEntity
 		if ( LifeState != LifeState.Alive )
 			return;
 
-		// TODO: We should probably implement TakeDamage on the team component and go through that here?
-		// Did we just get damaged by a teammate?
-		if ( info.Attacker is Player player )
-		{
-			// The player that attacked us was a teammate, so we'll ignore the damage.
-			if ( player.Team.IsFriendly( this ) )
-			{
-				Log.Info( $"Attacked by teammate {info.Attacker}" );
-				return;
-			}
-
-			// Not a teammate, show a log message so that we know the team system works
-			Log.Info( $"Attacked by enemy {info.Attacker}" );
-		}
+		if ( !Team.ShouldTakeDamage( info ) )
+			return;
 
 		// Check for headshot damage
 		var isHeadshot = info.Hitbox.HasTag( "head" );
