@@ -7,14 +7,24 @@
         <label class="with-subheader">Players: @Game.Clients.Count / @Game.Server.MaxPlayers</label>
     </column>
 
-    <column class="with-flex row wrap with-gap" style="max-width: 600px;">
-        @foreach( var cl in Game.Clients )
+    <column class="with-flex column wrap with-gap" style="max-width: 600px;">
+        @foreach ( var team in Teams() )
         {
-            <cell class="with-center with-padding with-gap-small">
-                <img class="with-avatar" src=@($"avatar:{cl.SteamId}") />
-                <label class="with-subheader">@cl.Name</label>
-                <label class="with-description">@(cl.Ping)ms</label>
-            </cell>
+            <column class="with-flex column with-gap">
+                <label class="with-header">@team.Key</label>
+
+                <row class="with-flex row with-gap">
+                    @foreach ( var cl in team )
+                    {
+                        <cell class="with-center with-padding with-gap-small">
+                            <img class="with-avatar" src=@($"avatar:{cl.SteamId}") />
+                            <label class="with-subheader">@cl.Name</label>
+                            <label class="with-description">@(cl.Ping)ms</label>
+                        </cell>                
+                    }
+                </row>
+
+            </column>
         }
     </column>
 </root>
@@ -25,6 +35,17 @@
     {
         return HashCode.Combine( Game.Clients.Count );
     }
+
+    // Grouped Players by team
+    public IEnumerable<IGrouping<string, IClient>> Teams()
+    {
+        var players = Game.Clients.Select(x => x.Pawn).OfType<Player>();
+
+        var teams = players.GroupBy(x => x.Team.TeamGameResource.DisplayName, x => x.Client);
+
+        return teams;
+    }
+
 
     public override void Tick()
     {
