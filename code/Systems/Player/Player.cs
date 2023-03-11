@@ -1,4 +1,5 @@
 using GoldRush.Mechanics;
+using GoldRush.Teams;
 using GoldRush.Weapons;
 
 namespace GoldRush;
@@ -24,6 +25,11 @@ public partial class Player : AnimatedEntity
 	/// The player's camera.
 	/// </summary>
 	[BindComponent] public PlayerCamera Camera { get; }
+
+	/// <summary>
+	/// The player's team.
+	/// </summary>
+	[BindComponent] public Team Team { get; }
 
 	/// <summary>
 	/// Accessor for getting a player's active weapon.
@@ -76,6 +82,9 @@ public partial class Player : AnimatedEntity
 		EnableHitboxes = true;
 
 		Tags.Add( "player" );
+
+		// Add permanent components
+		Components.Create<Team>();
 	}
 
 	/// <summary>
@@ -158,6 +167,21 @@ public partial class Player : AnimatedEntity
 	{
 		if ( LifeState != LifeState.Alive )
 			return;
+
+		// TODO: We should probably implement TakeDamage on the team component and go through that here?
+		// Did we just get damaged by a teammate?
+		if ( info.Attacker is Player player )
+		{
+			// The player that attacked us was a teammate, so we'll ignore the damage.
+			if ( player.Team.IsFriendly( this ) )
+			{
+				Log.Info( $"Attacked by teammate {info.Attacker}" );
+				return;
+			}
+
+			// Not a teammate, show a log message so that we know the team system works
+			Log.Info( $"Attacked by enemy {info.Attacker}" );
+		}
 
 		// Check for headshot damage
 		var isHeadshot = info.Hitbox.HasTag( "head" );
