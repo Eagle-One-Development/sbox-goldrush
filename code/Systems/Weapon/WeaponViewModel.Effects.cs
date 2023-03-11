@@ -87,14 +87,16 @@ public partial class WeaponViewModel
 
 		SmoothedVelocity += (controller.Velocity - SmoothedVelocity) * 5f * Time.Delta;
 
-		var isGrounded = controller.GroundEntity != null;
-		var speed = controller.Velocity.Length.LerpInverse( 0, 750 );
-		var bobSpeed = SmoothedVelocity.Length.LerpInverse( -250, 700 );
 		var isSprinting = controller.IsMechanicActive<SprintMechanic>();
+		var isCrouching = controller.IsMechanicActive<CrouchMechanic>();
+		var isGrounded = controller.GroundEntity != null;
+
+		var speed = controller.Velocity.WithZ( 0 ).Length.LerpInverse( 0, 500 );
+		var bobSpeed = SmoothedVelocity.WithZ( 0 ).Length.LerpInverse( -250, 500 );
+
 		var left = Camera.Rotation.Left;
 		var up = Camera.Rotation.Up;
 		var forward = Camera.Rotation.Forward;
-		var isCrouching = controller.IsMechanicActive<CrouchMechanic>();
 
 		LerpTowards( ref sprintLerp, isSprinting ? 1 : 0, 10f );
 		LerpTowards( ref crouchLerp, isCrouching ? 1 : 0, 7f );
@@ -148,8 +150,6 @@ public partial class WeaponViewModel
 			positionOffsetTarget += left * (velocity.y * Data.VelocityScale + Data.GlobalPositionOffset.y);
 			positionOffsetTarget += up * (velocity.z * Data.VelocityScale + Data.GlobalPositionOffset.z + upDownOffset);
 
-			float cycle = Time.Now * 10.0f;
-
 			// Crouching
 			rotationOffsetTarget *= Rotation.From( Data.CrouchAngleOffset * crouchLerp );
 			ApplyPositionOffset( Data.CrouchPositionOffset, crouchLerp );
@@ -157,13 +157,18 @@ public partial class WeaponViewModel
 			// Air
 			ApplyPositionOffset( new( 0, 0, 1 ), airLerp );
 
+			// View bobbing
+			float bobStrength = speed;
+			float cycle = Time.Now * 10.0f;
+
+			Rotation *= Rotation.From(
+				MathF.Abs( MathF.Sin( cycle ) * 1.0f ) * bobStrength,
+				MathF.Cos( cycle ) * bobStrength,
+				0
+			);
+
 			// Sprinting Camera Rotation
-			Camera.Rotation *= Rotation.From(
-				new Angles(
-					MathF.Abs( MathF.Sin( cycle ) * 1.0f ),
-					MathF.Cos( cycle ),
-					0
-				) * sprintLerp * 0.3f );
+			Rotation *= Rotation.Lerp( Rotation.Identity, Rotation.From( 10, 10, -10 ), sprintLerp );
 		}
 
 		realRotationOffset = rotationOffsetTarget;
