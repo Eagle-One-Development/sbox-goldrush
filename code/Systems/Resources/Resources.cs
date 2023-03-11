@@ -1,10 +1,10 @@
 ﻿namespace GoldRush;
 
-public class Rewards
+public class Resources
 {
 	public static int GetRewardForEvent( string eventName )
 	{
-		var resource = RewardsGameResource.Instance;
+		var resource = BalanceGameResource.Instance;
 		if ( resource.EventRewards.TryGetValue( eventName, out int reward ) )
 			return reward;
 
