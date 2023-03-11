@@ -12,11 +12,17 @@ public partial class Team : PlayerComponent, ISingletonComponent
 			: ResourceLibrary.Get<TeamGameResource>( "data/teams/blue.grteam" );
 	}
 
+	/// <summary>
+	/// Check if another player is friendly with us
+	/// </summary>
 	public bool IsFriendly( Player other )
 	{
 		return (other.Team.TeamGameResource == TeamGameResource);
 	}
 
+	/// <summary>
+	/// Check if another client is friendly with us
+	/// </summary>
 	public bool IsFriendly( IClient other )
 	{
 		if ( other.Pawn is Player player )
@@ -25,11 +31,17 @@ public partial class Team : PlayerComponent, ISingletonComponent
 		return false;
 	}
 
+	/// <summary>
+	/// Check if another player is enemies with us
+	/// </summary>
 	public bool IsEnemy( Player other )
 	{
 		return !IsFriendly( other );
 	}
 
+	/// <summary>
+	/// Check if another client is enemies with us
+	/// </summary>
 	public bool IsEnemy( IClient other )
 	{
 		if ( other.Pawn is Player player )
@@ -45,19 +57,10 @@ public partial class Team : PlayerComponent, ISingletonComponent
 	/// <returns><c>true</c> if the entity should take damage, <c>false</c> if the entity shouldn't</returns>
 	public bool ShouldTakeDamage( DamageInfo info )
 	{
-		// TODO: We should probably implement TakeDamage on the team component and go through that here?
 		// Did we just get damaged by a teammate?
-		if ( info.Attacker is Player player )
+		if ( info.Attacker is Player attackerPlayer )
 		{
-			// The player that attacked us was a teammate, so we'll ignore the damage.
-			if ( player.Team.IsFriendly( Entity ) )
-			{
-				Log.Info( $"Attacked by teammate {info.Attacker}" );
-				return false;
-			}
-
-			// Not a teammate, show a log message so that we know the team system works
-			Log.Info( $"Attacked by enemy {info.Attacker}" );
+			return IsEnemy( attackerPlayer );
 		}
 
 		return true;
