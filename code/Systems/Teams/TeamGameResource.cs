@@ -1,19 +1,19 @@
 ﻿namespace GoldRush.Teams;
 
 [GameResource( "Gold Rush Team", "grteam", "Defines a team for Gold Rush" )]
-public class TeamGameResource : GameResource, ITeam
+public class TeamGameResource : GameResource
 {
 	[Category( "Metadata" )] public string Id { get; set; }
 	[Category( "Metadata" )] public string DisplayName { get; set; }
 	[Category( "Metadata" )] public Color Color { get; set; }
 	[Category( "Metadata" )] public string ScssClass { get; set; }
 
-	public bool Equals( ITeam other )
+	public override bool Equals( object other )
 	{
-		if ( other is not ITeam )
+		if ( other is not TeamGameResource otherResource )
 			return false;
 
-		return (other.Id == Id);
+		return (otherResource.Id == Id);
 	}
 
 	public static bool operator ==( TeamGameResource a, TeamGameResource b )

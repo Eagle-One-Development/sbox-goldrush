@@ -2,12 +2,12 @@
 
 public partial class PlayerTeam : PlayerComponent, ISingletonComponent
 {
-	[Net] public TeamGameResource TeamGameResource { get; set; }
+	[Net] public TeamGameResource Resource { get; set; }
 
 	public PlayerTeam()
 	{
 		// We'll set the team up here for now
-		TeamGameResource = (Game.Clients.Count % 2 == 0)
+		Resource = (Game.Clients.Count % 2 == 0)
 			? ResourceLibrary.Get<TeamGameResource>( "data/teams/red.grteam" )
 			: ResourceLibrary.Get<TeamGameResource>( "data/teams/blue.grteam" );
 	}
@@ -17,7 +17,7 @@ public partial class PlayerTeam : PlayerComponent, ISingletonComponent
 	/// </summary>
 	public bool IsFriendly( Player other )
 	{
-		return (other.Team.TeamGameResource == TeamGameResource);
+		return (other.Team.Resource == Resource);
 	}
 
 	/// <summary>
