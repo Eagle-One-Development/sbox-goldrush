@@ -1,0 +1,33 @@
+@namespace GoldRush.UI
+@inherits Panel
+
+<root class="with-flex column with-gap with-shadow">
+    <column class="with-flex column with-gap">
+        <label class="with-header">@Game.Server.ServerTitle</label>
+        <label class="with-subheader">Players: @Game.Clients.Count / @Game.Server.MaxPlayers</label>
+    </column>
+
+    <column class="with-flex row wrap with-gap" style="max-width: 600px;">
+        @foreach( var cl in Game.Clients )
+        {
+            <cell class="with-center with-padding with-gap-small">
+                <img class="with-avatar" src=@($"avatar:{cl.SteamId}") />
+                <label class="with-subheader">@cl.Name</label>
+                <label class="with-description">@(cl.Ping)ms</label>
+            </cell>
+        }
+    </column>
+</root>
+
+@code
+{
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Game.Clients.Count );
+    }
+
+    public override void Tick()
+    {
+        SetClass( "open", Input.Down( InputButton.Score ) );
+    }
+}
