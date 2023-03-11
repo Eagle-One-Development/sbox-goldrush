@@ -1,4 +1,5 @@
 @namespace GoldRush.UI
+@using GoldRush.Teams;
 @inherits Panel
 
 <root class="with-flex column with-gap with-shadow">
@@ -14,11 +15,15 @@
                 <label class="with-header">@team.Key</label>
 
                 <row class="with-flex row with-gap">
-                    @foreach ( var cl in team )
+                    @foreach ( var player in team )
                     {
+                        var cl = player.Client;
+                        var gold = player.Gold;
+
                         <cell class="with-center with-padding with-gap-small">
                             <img class="with-avatar" src=@($"avatar:{cl.SteamId}") />
                             <label class="with-subheader">@cl.Name</label>
+                            <label class="with-description">$@(gold)</label>
                             <label class="with-description">@(cl.Ping)ms</label>
                         </cell>                
                     }
@@ -33,15 +38,14 @@
 {
     protected override int BuildHash()
     {
-        return HashCode.Combine( Game.Clients.Count );
+        return HashCode.Combine( Time.Now );
     }
 
     // Grouped Players by team
-    public IEnumerable<IGrouping<string, IClient>> Teams()
+    public IEnumerable<IGrouping<string, Player>> Teams()
     {
         var players = Game.Clients.Select(x => x.Pawn).OfType<Player>();
-
-        var teams = players.GroupBy(x => x.Team.TeamGameResource.DisplayName, x => x.Client);
+        var teams = players.GroupBy(x => x.Team.TeamGameResource.DisplayName, x => x);
 
         return teams;
     }

@@ -67,6 +67,11 @@ public partial class Player : AnimatedEntity
 	public bool IsGrounded => Controller.GroundEntity != null;
 
 	/// <summary>
+	/// How much gold does this player have?
+	/// </summary>
+	[Net] public int Gold { get; set; }
+
+	/// <summary>
 	/// When the player is first created. This isn't called when a player respawns.
 	/// </summary>
 	public override void Spawn()
@@ -198,6 +203,11 @@ public partial class Player : AnimatedEntity
 			{
 				Health = 0;
 				OnKilled();
+
+				if ( info.Attacker is Player attackingPlayer )
+				{
+					attackingPlayer.Gold += 10;
+				}
 			}
 		}
 

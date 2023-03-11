@@ -1,0 +1,21 @@
+﻿@using GoldRush.Weapons;
+
+@namespace GoldRush
+
+<root class="with-flex column-reverse with-gap with-shadow">
+    <cell class="with-center with-padding-large with-gap">
+		<i class="with-header with-icon">paid</i>
+        <label class="with-header">@Gold</label>
+    </cell>
+</root>
+
+@code
+{
+    public string Gold => $"{Player.Gold:F0}";
+    public Player Player => Game.LocalPawn as Player;
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player?.Gold);
+    }
+}
