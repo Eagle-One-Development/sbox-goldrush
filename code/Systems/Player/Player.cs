@@ -37,6 +37,11 @@ public partial class Player : AnimatedEntity
 	[BindComponent] public Resources Resources { get; }
 
 	/// <summary>
+	/// A list of components used by the player.
+	/// </summary>
+	public IEnumerable<PlayerComponent> PlayerComponents => Components.GetAll<PlayerComponent>();
+
+	/// <summary>
 	/// Accessor for getting a player's active weapon.
 	/// </summary>
 	public Weapon ActiveWeapon => Inventory?.ActiveWeapon;
@@ -210,9 +215,12 @@ public partial class Player : AnimatedEntity
 				Health = 0;
 				OnKilled();
 
-				if ( info.Attacker is Player attackingPlayer )
+				if ( Game.IsServer )
 				{
-					attackingPlayer.Resources.OnKill();
+					RunGameEvent( "player.waskilled" );
+
+					if ( info.Attacker is Player attackingPlayer )
+						attackingPlayer.RunGameEvent( "player.gotkill" );
 				}
 			}
 		}

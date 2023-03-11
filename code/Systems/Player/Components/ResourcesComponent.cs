@@ -1,6 +1,6 @@
 ﻿namespace GoldRush.Teams;
 
-public partial class Resources : EntityComponent<Player>, ISingletonComponent
+public partial class Resources : PlayerComponent, ISingletonComponent
 {
 	[Net] public int Gold { get; private set; }
 
@@ -8,8 +8,9 @@ public partial class Resources : EntityComponent<Player>, ISingletonComponent
 	{
 	}
 
-	public void OnKill()
+	public override void OnGameEvent( string eventName )
 	{
-		Gold += 10;
+		if ( eventName == "player.gotkill" )
+			Gold += 10;
 	}
 }

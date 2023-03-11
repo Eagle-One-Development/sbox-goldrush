@@ -1,6 +1,6 @@
 ﻿namespace GoldRush.Teams;
 
-public partial class Team : EntityComponent<Player>, ISingletonComponent
+public partial class Team : PlayerComponent, ISingletonComponent
 {
 	[Net] public TeamGameResource TeamGameResource { get; set; }
 
