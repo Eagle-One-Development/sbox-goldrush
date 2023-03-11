@@ -29,12 +29,12 @@ public partial class Player : AnimatedEntity
 	/// <summary>
 	/// The player's team.
 	/// </summary>
-	[BindComponent] public Team Team { get; }
+	[BindComponent] public PlayerTeam Team { get; }
 
 	/// <summary>
 	/// The player's resources (gold etc.)
 	/// </summary>
-	[BindComponent] public Resources Resources { get; }
+	[BindComponent] public PlayerResources Resources { get; }
 
 	/// <summary>
 	/// A list of components used by the player.
@@ -99,8 +99,8 @@ public partial class Player : AnimatedEntity
 		Tags.Add( "player" );
 
 		// Add permanent components
-		Components.Create<Team>();
-		Components.Create<Resources>();
+		Components.Create<PlayerTeam>();
+		Components.Create<PlayerResources>();
 	}
 
 	/// <summary>

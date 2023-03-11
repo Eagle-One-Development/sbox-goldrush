@@ -1,10 +1,10 @@
 ﻿namespace GoldRush.Teams;
 
-public partial class Team : PlayerComponent, ISingletonComponent
+public partial class PlayerTeam : PlayerComponent, ISingletonComponent
 {
 	[Net] public TeamGameResource TeamGameResource { get; set; }
 
-	public Team()
+	public PlayerTeam()
 	{
 		// We'll set the team up here for now
 		TeamGameResource = (Game.Clients.Count % 2 == 0)
