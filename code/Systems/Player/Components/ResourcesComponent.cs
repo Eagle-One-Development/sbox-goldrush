@@ -10,7 +10,6 @@ public partial class Resources : PlayerComponent, ISingletonComponent
 
 	public override void OnGameEvent( string eventName )
 	{
-		if ( eventName == "player.gotkill" )
-			Gold += 10;
+		Gold += Rewards.GetRewardForEvent( eventName );
 	}
 }
