@@ -32,6 +32,11 @@ public partial class Player : AnimatedEntity
 	[BindComponent] public Team Team { get; }
 
 	/// <summary>
+	/// The player's resources (gold etc.)
+	/// </summary>
+	[BindComponent] public Resources Resources { get; }
+
+	/// <summary>
 	/// Accessor for getting a player's active weapon.
 	/// </summary>
 	public Weapon ActiveWeapon => Inventory?.ActiveWeapon;
@@ -69,7 +74,7 @@ public partial class Player : AnimatedEntity
 	/// <summary>
 	/// How much gold does this player have?
 	/// </summary>
-	[Net] public int Gold { get; set; }
+	public int Gold => Resources.Gold;
 
 	/// <summary>
 	/// When the player is first created. This isn't called when a player respawns.
@@ -90,6 +95,7 @@ public partial class Player : AnimatedEntity
 
 		// Add permanent components
 		Components.Create<Team>();
+		Components.Create<Resources>();
 	}
 
 	/// <summary>
@@ -206,7 +212,7 @@ public partial class Player : AnimatedEntity
 
 				if ( info.Attacker is Player attackingPlayer )
 				{
-					attackingPlayer.Gold += 10;
+					attackingPlayer.Resources.OnKill();
 				}
 			}
 		}
