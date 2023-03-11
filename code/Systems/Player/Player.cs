@@ -46,6 +46,21 @@ public partial class Player : AnimatedEntity
 	static Model PlayerModel = Model.Load( "models/citizen/citizen.vmdl" );
 
 	/// <summary>
+	/// Is the player currently sprinting?
+	/// </summary>
+	public bool IsSprinting => Controller.IsMechanicActive<SprintMechanic>();
+
+	/// <summary>
+	/// Is the player currently crouching?
+	/// </summary>
+	public bool IsCrouching => Controller.IsMechanicActive<CrouchMechanic>();
+
+	/// <summary>
+	/// Is the player on the ground?
+	/// </summary>
+	public bool IsGrounded => Controller.GroundEntity != null;
+
+	/// <summary>
 	/// When the player is first created. This isn't called when a player respawns.
 	/// </summary>
 	public override void Spawn()

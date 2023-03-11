@@ -1,5 +1,3 @@
-using GoldRush.Mechanics;
-
 namespace GoldRush.Weapons;
 
 public partial class WeaponViewModel
@@ -87,9 +85,9 @@ public partial class WeaponViewModel
 
 		SmoothedVelocity += (controller.Velocity - SmoothedVelocity) * 5f * Time.Delta;
 
-		var isSprinting = controller.IsMechanicActive<SprintMechanic>();
-		var isCrouching = controller.IsMechanicActive<CrouchMechanic>();
-		var isGrounded = controller.GroundEntity != null;
+		var isSprinting = player.IsSprinting;
+		var isCrouching = player.IsCrouching;
+		var isGrounded = player.IsGrounded;
 
 		var speed = controller.Velocity.WithZ( 0 ).Length.LerpInverse( 0, 500 );
 		var bobSpeed = SmoothedVelocity.WithZ( 0 ).Length.LerpInverse( -250, 500 );
