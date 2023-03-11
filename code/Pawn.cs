@@ -1,8 +1,6 @@
 ﻿using Sandbox;
-using System;
-using System.Linq;
 
-namespace Sandbox;
+namespace GoldRush;
 
 partial class Pawn : AnimatedEntity
 {

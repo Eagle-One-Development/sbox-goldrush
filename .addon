@@ -21,6 +21,16 @@
     "RankType": "None",
     "PerMapRanking": false,
     "LeaderboardType": "None",
-    "ProjectTemplate": null
+    "ProjectTemplate": null,
+    "CsProjName": "GoldRush",
+    "Compiler": {
+      "RootNamespace": "GoldRush",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;"
+    },
+    "ControlModes": {
+      "Keyboard": true,
+      "Gamepad": true
+    }
   }
 }
