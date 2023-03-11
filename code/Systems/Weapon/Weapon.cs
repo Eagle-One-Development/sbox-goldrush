@@ -20,9 +20,16 @@ public partial class Weapon : AnimatedEntity
 	}
 
 	/// <summary>
+	/// Is the player in a state where they can fire a weapon?
+	/// </summary>
+	public bool CanFire( Player player )
+	{
+		return !player.IsSprinting;
+	}
+
+	/// <summary>
 	/// Can we holster the weapon right now? Reasons to reject this could be that we're reloading the weapon..
 	/// </summary>
-	/// <returns></returns>
 	public bool CanHolster( Player player )
 	{
 		return true;
@@ -42,7 +49,6 @@ public partial class Weapon : AnimatedEntity
 	/// <summary>
 	/// Can we deploy this weapon? Reasons to reject this could be that we're performing an action.
 	/// </summary>
-	/// <returns></returns>
 	public bool CanDeploy( Player player )
 	{
 		return true;
