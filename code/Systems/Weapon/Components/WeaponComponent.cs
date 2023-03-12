@@ -1,6 +1,6 @@
 namespace GoldRush.Weapons;
 
-public partial class WeaponComponent : EntityComponent<Weapon>
+public partial class WeaponComponent : GameComponent<Weapon>
 {
 	protected Weapon Weapon => Entity;
 	protected Player Player => Weapon.Owner as Player;

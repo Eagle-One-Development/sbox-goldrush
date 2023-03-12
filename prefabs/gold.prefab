@@ -1,0 +1,43 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "2dcb914e-1c1d-4a10-95b5-6e9f1645d764",
+    "Class": "model_entity",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "d290cdd6-a6b8-4445-aa4a-2e5749ca539a",
+        "Class": "BobbingComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022Bobbing Component\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022fish.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Temporary Fish Model\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022placeholder gold model\u0022"
+      }
+    }
+  }
+}

@@ -39,7 +39,7 @@ public partial class Player : AnimatedEntity
 	/// <summary>
 	/// A list of components used by the player.
 	/// </summary>
-	public IEnumerable<PlayerComponent> PlayerComponents => Components.GetAll<PlayerComponent>();
+	public IEnumerable<GameComponent<Player>> PlayerComponents => Components.GetAll<GameComponent<Player>>();
 
 	/// <summary>
 	/// Accessor for getting a player's active weapon.
