@@ -2,7 +2,13 @@
 
 public partial class PlayerResources : GameComponent<Player>, ISingletonComponent
 {
-	[Net] public int Gold { get; private set; }
+	[Net] private int NetGold { get; set; }
+
+	public int Gold
+	{
+		get => NetGold;
+		private set => NetGold = value;
+	}
 
 	public override void OnGameEvent( string eventName )
 	{
