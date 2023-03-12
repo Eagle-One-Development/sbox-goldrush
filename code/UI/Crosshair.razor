@@ -9,52 +9,53 @@
         left: 50%;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
+        .element
 
-        .element {
-            transform: translateX(-50%) translateY(-50%);
-            position: absolute;
-            background-color: rgba( white, 0.75 );
-            box-shadow: 0px 0px 5px rgba( black, 0.75 );
-        }
-
-        .dot {
-            width: 3px;
-            height: 3px;
-        }
-
-        .left, .right {
-            width: 10px;
-            height: 2px;
-        }
-
-        .top, .bottom {
-            width: 2px;
-            height: 10px;
-        }
-
-        .left {
-            left: -@Distance;
-        }
-
-        .right {
-            left: @Distance;
-        }
-
-        .top {
-            top: -@Distance;
-        }
-
-        .bottom {
-            top: @Distance;
-        }
-
-        transition: opacity 0.1s ease;
-        opacity: 0;
-        &.visible {
-            opacity: 1;
-        }
+    {
+        transform: translateX(-50%) translateY(-50%);
+        position: absolute;
+        background-color: rgba( white, 0.75 );
+        box-shadow: 0px 0px 5px rgba( black, 0.75 );
     }
-</style>
+
+    .dot {
+        width: 3px;
+        height: 3px;
+    }
+
+    .left, .right {
+        width: 10px;
+        height: 2px;
+    }
+
+    .top, .bottom {
+        width: 2px;
+        height: 10px;
+    }
+
+    .left {
+        left: -@Distance;
+    }
+
+    .right {
+        left: @Distance;
+    }
+
+    .top {
+        top: -@Distance;
+    }
+
+    .bottom {
+        top: @Distance;
+    }
+
+    transition: opacity 0.1s ease;
+    opacity: 0;
+    &.visible {
+        opacity: 1;
+    }
+
+    }</style>
 
 <root>
     <div class="left element"></div>
@@ -65,33 +66,46 @@
 </root>
 
 @code {
-    public float PixelDistance { get; set; } = 20f;
-    public string Distance => $"{PixelDistance}px";
+    private float _pixelDistance;
+    private float _smoothedPixelDistance;
+
+    public string Distance => $"{_smoothedPixelDistance}px";
 
     protected override void OnAfterTreeRender(bool firstTime)
     {
-        base.OnAfterTreeRender( firstTime );
+        base.OnAfterTreeRender(firstTime);
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( Time.Now );
+        return HashCode.Combine(Time.Now);
     }
 
     public override void Tick()
     {
         var player = Game.LocalPawn as Player;
         var weapon = player?.Inventory?.ActiveWeapon;
-        var isAiming = weapon?.Tags.Has( "aiming" ) ?? false;
+        var canFire = weapon?.CanFire(player) ?? false;
+        var isVisible = canFire;
 
-        var distance = player?.Velocity.Length.LerpInverse( 0, 750, true ).Remap( 0, 1, 20, 60 ) ?? 20f;
+        if (player.Controller == null)
+        {
+            _pixelDistance = 100000f;
+            return;
+        }
+
+        var distance = player?.Velocity.WithZ(0).Length.LerpInverse(0, 750, true).Remap(0, 1, 20, 60) ?? 20f;
         float timeSinceActivated = weapon?.GetComponent<PrimaryFire>()?.TimeSinceActivated ?? 1;
-        var fireAmt = 1 - timeSinceActivated.LerpInverse( 0, 0.25f, true );
+        var fireAmt = 1 - timeSinceActivated.LerpInverse(0, 0.25f, true);
 
         distance += fireAmt * 50;
 
-        PixelDistance = distance;
+        if (player.Controller.GroundEntity == null)
+            distance *= 2.0f;
 
-        SetClass( "visible", !isAiming );
+        _pixelDistance = distance;
+        _smoothedPixelDistance = _smoothedPixelDistance.LerpTo(_pixelDistance, 10f * Time.Delta);
+
+        SetClass("visible", isVisible);
     }
 }
