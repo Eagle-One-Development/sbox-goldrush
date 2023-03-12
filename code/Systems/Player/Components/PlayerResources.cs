@@ -7,11 +7,16 @@ public partial class PlayerResources : GameComponent<Player>, ISingletonComponen
 	public int Gold
 	{
 		get => NetGold;
-		private set => NetGold = value;
+		private set
+		{
+			// We don't want players to get into debt, so we clamp the value to 0
+			NetGold = value.Clamp( 0, int.MaxValue );
+		}
 	}
 
 	public override void OnGameEvent( string eventName )
 	{
+		// Some events give us gold
 		Gold += Resources.GetRewardForEvent( eventName );
 	}
 
