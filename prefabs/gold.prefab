@@ -14,7 +14,17 @@
           "_name": {
             "Value": "\u0022Bobbing Component\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          },
+          "Speed": {
+            "Type": "Single",
+            "Value": "90"
+          },
+          "Height": {
+            "Type": "Single",
+            "Value": "0"
+          }
         }
       }
     ],
