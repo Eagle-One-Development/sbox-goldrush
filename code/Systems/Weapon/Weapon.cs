@@ -28,6 +28,14 @@ public partial class Weapon : AnimatedEntity
 	}
 
 	/// <summary>
+	/// Is the player in a state where they can reload a weapon?
+	/// </summary>
+	public bool CanReload( Player player )
+	{
+		return !player.IsSprinting;
+	}
+
+	/// <summary>
 	/// Can we holster the weapon right now? Reasons to reject this could be that we're reloading the weapon..
 	/// </summary>
 	public bool CanHolster( Player player )
