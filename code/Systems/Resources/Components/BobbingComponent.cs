@@ -3,7 +3,8 @@
 [Prefab, Title( "Bobbing Component" )]
 public partial class BobbingComponent : EntityComponent
 {
-	[Net] public Vector3 PositionOffset { get; set; }
+	[Prefab, Net] public float Speed { get; set; } = 90f;
+	[Prefab, Net] public float Height { get; set; } = 2f;
 
 	[Event.PreRender]
 	public virtual void OnPreRender()
@@ -15,10 +16,10 @@ public partial class BobbingComponent : EntityComponent
 			return;
 
 		// Rotate over time 🔁
-		sceneObject.Rotation = Rotation.From( 0, Time.Now * 90f, 0 );
+		sceneObject.Rotation = Rotation.From( 0, Time.Now * Speed, 0 );
 
 		// Bob up and down ↕️
-		Vector3 bobbingOffset = Vector3.Up * MathF.Sin( Time.Now * 2f );
-		sceneObject.Position = Entity.Position + (bobbingOffset + PositionOffset) * Entity.Scale;
+		Vector3 bobbingOffset = Vector3.Up * MathF.Sin( Time.Now ) * Height;
+		sceneObject.Position = Entity.Position + bobbingOffset;
 	}
 }
