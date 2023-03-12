@@ -20,6 +20,10 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		if ( TimeUntilCanFire > 0 ) return false;
 		if ( !Weapon.CanFire( player ) ) return false;
 
+		// check for ammo
+		if ( Weapon.Components.TryGet<AmmoComponent>( out var ammo ) && (!ammo.HasAmmo() || ammo.IsReloading) )
+			return false;
+
 		return TimeSinceActivated > FireDelay;
 	}
 
@@ -33,6 +37,9 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 	protected override void OnStart( Player player )
 	{
+		if ( Weapon.Components.TryGet<AmmoComponent>( out var ammo ) && !ammo.TakeAmmo() )
+			return;
+
 		base.OnStart( player );
 
 		player?.SetAnimParameter( "b_attack", true );

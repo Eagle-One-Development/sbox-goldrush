@@ -37,6 +37,11 @@ public partial class Player : AnimatedEntity
 	[BindComponent] public PlayerResources Resources { get; }
 
 	/// <summary>
+	/// The player's ammo.
+	/// </summary>
+	[BindComponent] public PlayerAmmo Ammo { get; }
+
+	/// <summary>
 	/// A list of components used by the player.
 	/// </summary>
 	public IEnumerable<GameComponent<Player>> PlayerComponents => Components.GetAll<GameComponent<Player>>();
@@ -101,6 +106,7 @@ public partial class Player : AnimatedEntity
 		// Add permanent components
 		Components.Create<PlayerTeam>();
 		Components.Create<PlayerResources>();
+		Components.Create<PlayerAmmo>();
 	}
 
 	/// <summary>

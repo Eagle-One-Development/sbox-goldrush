@@ -150,6 +150,34 @@
             "Value": "[]"
           }
         }
+      },
+      {
+        "Guid": "b4c6b8e0-dbe1-4515-a863-2204856b2090",
+        "Class": "AmmoComponent",
+        "Keys": {
+          "ReloadTime": {
+            "Type": "Single",
+            "Value": "3.8"
+          },
+          "ClipSize": {
+            "Type": "Int32",
+            "Value": "30"
+          },
+          "Type": {
+            "Type": "AmmoType",
+            "Value": "\u0022Smg\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Ammo\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "ReloadSound": {
+            "Type": "String",
+            "Value": "\u0022weapons/rust_smg/sounds/rust_smg.reloadstart.sound\u0022"
+          }
+        }
       }
     ],
     "Keys": {

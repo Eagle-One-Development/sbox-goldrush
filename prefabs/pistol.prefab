@@ -150,6 +150,42 @@
             "Value": "[]"
           }
         }
+      },
+      {
+        "Guid": "e547346d-65e9-4599-8e56-5ea6dadf1761",
+        "Class": "AmmoComponent",
+        "Keys": {
+          "ClipSize": {
+            "Type": "Int32",
+            "Value": "16"
+          },
+          "MaximumAmmo": {
+            "Type": "Int32",
+            "Value": "96"
+          },
+          "InitialAmmo": {
+            "Type": "Int32",
+            "Value": "16"
+          },
+          "_name": {
+            "Value": "\u0022Pistol Ammo\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "ReloadTime": {
+            "Type": "Single",
+            "Value": "2.5"
+          },
+          "Type": {
+            "Type": "AmmoType",
+            "Value": "\u0022Generic\u0022"
+          },
+          "ReloadSound": {
+            "Type": "String",
+            "Value": "\u0022weapons/rust_smg/sounds/rust_smg.reloadstart.sound\u0022"
+          }
+        }
       }
     ],
     "Keys": {
