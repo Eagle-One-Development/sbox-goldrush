@@ -34,10 +34,10 @@ public partial class PlayerCamera : EntityComponent<Player>, ISingletonComponent
 		float fovMultiplier = 1.0f;
 
 		if ( player.Controller.IsMechanicActive<SprintMechanic>() )
-			fovMultiplier = 1.2f;
+			fovMultiplier = 1.1f;
 
 		// Interpolate so that FOV transitions smoothly
-		_interpolatedFovMultiplier = _interpolatedFovMultiplier.LerpTo( fovMultiplier, 15f * Time.Delta );
+		_interpolatedFovMultiplier = _interpolatedFovMultiplier.LerpTo( fovMultiplier, 10f * Time.Delta );
 
 		float fieldOfView = Game.Preferences.FieldOfView * _interpolatedFovMultiplier;
 		return fieldOfView;
