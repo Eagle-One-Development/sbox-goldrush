@@ -7,7 +7,7 @@ public enum AmmoType
 	Smg
 }
 
-public partial class PlayerAmmo : PlayerComponent, ISingletonComponent
+public partial class PlayerAmmo : GameComponent<Player>, ISingletonComponent
 {
 	[Net] public IDictionary<AmmoType, int> Ammo { get; set; } = new Dictionary<AmmoType, int>();
 

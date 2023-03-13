@@ -11,22 +11,64 @@ public partial class Player
 	static string s_realm = Game.IsServer ? "server" : "client";
 	static Logger s_eventLogger = new Logger( $"player/GameEvent/{s_realm}" );
 
+	/// <summary>
+	/// Runs a game event on all components that apply to this player.
+	/// </summary>
 	public void RunGameEvent( string eventName )
 	{
 		eventName = eventName.ToLowerInvariant();
 
-		Inventory?.ActiveWeapon?.Components.GetAll<WeaponComponent>()
-			.ToList()
-			.ForEach( x => x.OnGameEvent( eventName ) );
-
-		Controller?.Mechanics.ToList()
-			.ForEach( x => x.OnGameEvent( eventName ) );
-
-		PlayerComponents?.ToList()
-			.ForEach( x => x.OnGameEvent( eventName ) );
+		var components = CollectComponents();
+		components.ForEach( x => RunEventOnComponent( eventName, x ) );
 
 		if ( DebugGameEvents )
 			DebugGameEvent( eventName );
+	}
+
+	/// <summary>
+	/// Collects all of the game components that apply to this player: weapon components,
+	/// controller components, and top-level player components.
+	/// </summary>
+	private List<IGameComponent> CollectComponents()
+	{
+		var components = new List<IGameComponent>();
+
+		var weaponComponents = Inventory?.ActiveWeapon?.Components.GetAll<WeaponComponent>();
+		var controllerComponents = Controller?.Mechanics;
+		var playerComponents = PlayerComponents;
+
+		if ( weaponComponents != null )
+			components.AddRange( Inventory?.ActiveWeapon?.Components.GetAll<WeaponComponent>() );
+
+		if ( controllerComponents != null )
+			components.AddRange( Controller?.Mechanics );
+
+		if ( playerComponents != null )
+			components.AddRange( PlayerComponents );
+
+		return components;
+	}
+
+	/// <summary>
+	/// Invokes OnGameEvent on a given component as well as methods marked with 
+	/// the [OnGameEvent] attribute using the given event name.
+	/// </summary>
+	/// <param name="eventName"></param>
+	/// <param name="target"></param>
+	private void RunEventOnComponent( string eventName, IGameComponent target )
+	{
+		if ( target == null )
+			return;
+
+		target.OnGameEvent( eventName );
+
+		// This is probably slow as balls, we will likely need to swap this out for
+		// something more performant later.
+		TypeLibrary.GetType( target.GetType() )
+			.Methods
+			.Where( x => x.GetCustomAttribute<OnGameEventAttribute>()?.EventName == eventName )
+			.ToList()
+			.ForEach( x => x.Invoke( target ) );
 	}
 
 	int _debugLine;

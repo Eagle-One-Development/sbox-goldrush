@@ -1,6 +1,6 @@
 namespace GoldRush.Mechanics;
 
-public partial class PlayerControllerMechanic : EntityComponent<Player>
+public partial class PlayerControllerMechanic : GameComponent<Player>
 {
 	/// <summary>
 	/// Is this mechanic active?
