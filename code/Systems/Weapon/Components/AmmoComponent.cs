@@ -83,6 +83,13 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 
 		if ( IsReloading && TimeSinceActivated > ReloadTime )
 			FinishReload();
+
+		// ammo dropping
+		if ( player.Ammo.HasAmmo( Type ) && Input.Pressed( InputButton.Drop ) && Game.IsServer )
+		{
+			var ammo = player.Ammo.TryTakeAmmo( Type, ClipSize );
+			DropAmmo( player, ammo );
+		}
 	}
 
 	private void FinishReload()
@@ -91,6 +98,60 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		Ammo += ammo;
 
 		IsReloading = false;
+	}
+
+	public void DropAmmo( Player player, int amount )
+	{
+		Game.AssertServer();
+
+		var ent = new AmmoEntity();
+		ent.Type = Type;
+		ent.Amount = amount;
+
+		ent.Position = player.EyePosition;
+		ent.Velocity = player.EyeRotation.Forward * 250;
+		ent.ResetInterpolation();
+	}
+
+	partial class AmmoEntity : ModelEntity
+	{
+		public AmmoType Type;
+		public int Amount;
+		public TimeSince TimeSinceDropped;
+
+		public override void Spawn()
+		{
+			base.Spawn();
+
+			SetModel( "models/sbox_props/cardboard_box/cardboard_box.vmdl" );
+			SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+			Tags.Add( "ammo", "prop", "trigger" );
+
+			Scale = 0.5f;
+
+			EnableDrawing = true;
+			EnableAllCollisions = true;
+			EnableTouch = true;
+
+			TimeSinceDropped = 0;
+		}
+
+		public override void StartTouch( Entity other )
+		{
+			base.StartTouch( other );
+
+			if ( !Game.IsServer )
+				return;
+
+			if ( other is not Player player )
+				return;
+
+			if ( TimeSinceDropped <= 1f )
+				return;
+
+			player.Ammo.AddAmmo( Type, Amount );
+			Delete();
+		}
 	}
 }
 
