@@ -1,5 +1,6 @@
 {
   "EventRewards": {
-    "player.gotkill": 10
+    "player.gotkill": 10,
+    "player.waskilled": -10
   }
 }
