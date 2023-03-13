@@ -21,11 +21,44 @@ public partial class Nexus : AnimatedEntity
 	[Net]
 	public int Health { get; set; }
 
+	public delegate void OnDeathEvent( Nexus nexus );
+	public event OnDeathEvent OnDeath;
+
 
 	public override void Spawn()
 	{
 		base.Spawn();
 		Transmit = TransmitType.Always;
 
+	}
+
+
+	[Event.Frame]
+	public void DrawDebugInfo()
+	{
+
+	}
+
+	public override void TakeDamage( DamageInfo info )
+	{
+		base.TakeDamage( info );
+
+		//If the attacker is a player and has a team component
+		if ( info.Attacker is Player player && player.Team != null )
+		{
+			//If the player's team is the same as the nexus's team
+			if ( player.Team.Id == TeamId )
+			{
+				//Don't take damage
+				return;
+			}
+		}
+
+		Health -= info.Damage;
+		if ( Health <= 0 )
+		{
+			OnDeath?.Invoke( this );
+			Health = 0;
+		}
 	}
 }
