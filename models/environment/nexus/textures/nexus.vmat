@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "complex.vfx"
+	shader "complex.shader"
 
 	//---- PBR ----
 	F_METALNESS_TEXTURE 1
@@ -20,7 +20,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/environment/textures/nexus_color.png"
+	TextureColor "models/environment/nexus/textures/nexus_color.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -28,18 +28,14 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
 	//---- Metalness ----
-	TextureMetalness "models/environment/textures/nexus_metal.png"
+	TextureMetalness "models/environment/nexus/textures/nexus_metal.png"
 
 	//---- Normal ----
-	TextureNormal "models/environment/textures/nexus_normal.png"
+	TextureNormal "models/environment/nexus/textures/nexus_normal.png"
 
 	//---- Roughness ----
-	TextureRoughness "models/environment/textures/nexus_rough.png"
+	TextureRoughness "models/environment/nexus/textures/nexus_rough.png"
 
 	//---- Self Illum ----
 	g_flSelfIllumAlbedoFactor "1.000"
@@ -47,7 +43,7 @@ Layer0
 	g_flSelfIllumScale "1.000"
 	g_vSelfIllumScrollSpeed "[0.000 0.000]"
 	g_vSelfIllumTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureSelfIllumMask "models/environment/textures/nexus_selfillum.png"
+	TextureSelfIllumMask "models/environment/nexus/textures/nexus_selfillum.png"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
@@ -59,5 +55,5 @@ Layer0
 	//---- Translucent ----
 	g_flAlphaTestReference "0.500"
 	g_flAntiAliasedEdgeStrength "1.000"
-	TextureTranslucency "models/environment/textures/nexus_trans.png"
+	TextureTranslucency "models/environment/nexus/textures/nexus_trans.png"
 }

@@ -16,19 +16,19 @@
 						[
 							{
 								from = "grapplinghook.vmat"
-								to = "models/weapons/textures/grapplinghook.vmat"
+								to = "materials/default/white.vmat"
 							},
 							{
 								from = "lava.vmat"
-								to = "materials/environment/magma_orange.vmat"
+								to = "materials/default/white.vmat"
 							},
 							{
 								from = "magma.vmat"
-								to = "materials/environment/magma_orange.vmat"
+								to = "materials/default/white.vmat"
 							},
 							{
 								from = "nexuschamber.vmat"
-								to = "models/environment/textures/nexus.vmat"
+								to = "models/environment/nexus/textures/nexus.vmat"
 							},
 						]
 						use_global_default = false
@@ -55,10 +55,7 @@
 						_class = "PhysicsShapeCylinder"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						radius = 71.942101
 						point0 = [ 0.870605, 0.267197, 0.00296 ]
 						point1 = [ 0.870605, 0.267197, 9.409363 ]
@@ -67,10 +64,7 @@
 						_class = "PhysicsShapeCylinder"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						radius = 58.065231
 						point0 = [ 0.870605, 0.267197, 11.626617 ]
 						point1 = [ 0.870605, 0.267197, 201.718384 ]
@@ -79,10 +73,7 @@
 						_class = "PhysicsShapeCylinder"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						radius = 10.115239
 						point0 = [ 66.59655, 0.731551, 36.675705 ]
 						point1 = [ 66.59655, 0.731551, 80.536057 ]
@@ -91,10 +82,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						origin = [ 41.974579, 41.719856, 95.499298 ]
 						angles = [ 0.0, -53.0, 0.0 ]
 						dimensions = [ 45.154907, 16.311649, 197.146729 ]
@@ -107,10 +95,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/environment/src/nexus.fbx"
+						filename = "models/environment/nexus/src/nexus.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 0.5
+						import_scale = 0.3937
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -127,5 +115,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

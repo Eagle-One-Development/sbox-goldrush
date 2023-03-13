@@ -8,6 +8,7 @@ namespace GoldRush.Nexus;
 
 [Library( "goldrush_nexus" )]
 [HammerEntity]
+[EditorModel( "models/environment/nexus/spawnnexus.vmdl" )]
 [Title( "Nexus" ), Category( "Gameplay" )]
 public partial class Nexus : AnimatedEntity
 {
