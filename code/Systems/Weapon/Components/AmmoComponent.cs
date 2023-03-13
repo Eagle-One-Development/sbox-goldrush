@@ -119,15 +119,18 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		public int Amount;
 		public TimeSince TimeSinceDropped;
 
+		private Particles Effect;
+
 		public override void Spawn()
 		{
 			base.Spawn();
 
-			SetModel( "models/sbox_props/cardboard_box/cardboard_box.vmdl" );
+			SetModel( "models/sbox_props/burger_box/burger_box.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 			Tags.Add( "ammo", "prop", "trigger" );
 
-			Scale = 0.5f;
+			Effect = Particles.Create( "particles/pickup.vpcf" );
+			Effect.SetEntity( 0, this );
 
 			EnableDrawing = true;
 			EnableAllCollisions = true;
@@ -150,6 +153,7 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 				return;
 
 			player.Ammo.AddAmmo( Type, Amount );
+			Effect?.Destroy( true );
 			Delete();
 		}
 	}
