@@ -29,4 +29,10 @@ public partial class PlayerResources : GameComponent<Player>, ISingletonComponen
 		// Drop gold when killed 🤑
 		Resources.TryDropFromPosition( Entity.EyePosition, 100, out _ );
 	}
+
+	[OnGameEvent( "gold.pickup" )]
+	private void OnGoldPickup()
+	{
+		Gold += 10;
+	}
 }
