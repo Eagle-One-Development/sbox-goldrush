@@ -47,12 +47,10 @@ public partial class GoldRushGameManager : GameManager
 
 		if ( !All.OfType<TeamSpawnPoint>().Any() )
 		{
-			Log.Info( $"no team transform" );
 			spawnTransform = All.OfType<SpawnPoint>().OrderBy( x => Guid.NewGuid() ).FirstOrDefault().Transform;
 		}
 		else
 		{
-			Log.Info( $"team spawn" );
 			spawnTransform = All.OfType<TeamSpawnPoint>().OrderBy( x => Guid.NewGuid() ).Where( x => x.Team.Id == player.Team.Resource.Id ).FirstOrDefault().Transform;
 		}
 
