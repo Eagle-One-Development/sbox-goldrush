@@ -5,7 +5,7 @@ namespace GoldRush.Nexus;
 
 [Library( "goldrush_nexus" )]
 [HammerEntity]
-[EditorModel( "models/environment/nexus/spawnnexus.vmdl" )]
+[Model( Model = "models/environment/nexus/spawnnexus.vmdl" )]
 [Title( "Nexus" ), Category( "Gameplay" )]
 public partial class Nexus : AnimatedEntity
 {
@@ -22,14 +22,11 @@ public partial class Nexus : AnimatedEntity
 	public override void Spawn()
 	{
 		base.Spawn();
-		SetModel( "models/environment/nexus/spawnnexus.vmdl" );
 		Transmit = TransmitType.Always;
 		Health = MaxHealth;
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 		Tags.Add( "solid" );
-
 	}
-
 
 	[Event.Client.Frame]
 	public void DrawDebugInfo()
