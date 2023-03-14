@@ -47,6 +47,7 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 
 	protected override bool CanStart( Player player )
 	{
+		if ( !player.Ammo.HasAmmo( Type ) ) return false;
 		if ( Ammo >= ClipSize ) return false;
 		if ( !Input.Down( InputButton.Reload ) ) return false;
 		if ( TimeUntilCanReload > 0 ) return false;
