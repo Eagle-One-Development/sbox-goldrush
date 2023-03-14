@@ -2,8 +2,6 @@
 {
 	_class = "CParticleSystemDefinition"
 	m_nBehaviorVersion = 10
-	m_nInitialParticles = 10
-	m_nMaxParticles = 10
 	m_controlPointConfigurations = 
 	[
 		{
