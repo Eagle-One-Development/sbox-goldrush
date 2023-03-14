@@ -107,6 +107,7 @@ public partial class Player : AnimatedEntity
 		Components.Create<PlayerTeam>();
 		Components.Create<PlayerResources>();
 		Components.Create<PlayerAmmo>();
+		Components.Create<PlayerHud>();
 	}
 
 	/// <summary>

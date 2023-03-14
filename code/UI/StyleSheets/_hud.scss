@@ -5,6 +5,11 @@ $rounding: 4px;
 @import "_info.scss";
 @import "_goldinfo.scss";
 @import "_players.scss";
+@import "_eventfeed.scss";
+
+hud {
+    font-family: Poppins;
+}
 
 .with-flex
 {

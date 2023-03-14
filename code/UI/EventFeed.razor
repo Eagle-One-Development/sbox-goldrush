@@ -1,0 +1,66 @@
+﻿@using GoldRush.Weapons;
+
+@namespace GoldRush
+
+<root class="with-flex column-reverse with-gap with-shadow">
+	@foreach (var e in _events)
+	{
+		<cell class="with-center with-padding-large with-gap">
+			<label class="with-text">@e.Text</label>
+
+			@if (e.Value != 0)
+			{
+				<label class="with-value">@(e.Value)g</label>
+			}
+		</cell>
+	}
+</root>
+
+@code
+{
+	public string Gold => $"{Player.Gold:F0}";
+	public Player Player => Game.LocalPawn as Player;
+
+	private static EventFeed Instance { get; set; }
+
+	public EventFeed()
+	{
+		Instance = this;
+	}
+
+	struct Entry
+	{
+		public string Text;
+		public int Value;
+
+		private TimeSince _timeSinceCreated;
+
+		public Entry(string text, int value)
+		{
+			Text = text;
+			Value = value;
+
+			_timeSinceCreated = 0;
+		}
+
+		public void Tick()
+		{
+			if (_timeSinceCreated > 5)
+			{
+				Instance._events.Remove(this);
+			}
+		}
+	}
+
+	private List<Entry> _events = new List<Entry>();
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Time.Now);
+	}
+
+	public override void Tick()
+	{
+		_events.ToList().ForEach(x => x.Tick());
+	}
+}

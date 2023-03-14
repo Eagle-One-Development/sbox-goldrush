@@ -1,0 +1,36 @@
+﻿EventFeed {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 0;
+
+    .with-value {
+        border-left: 1px solid rgba( white, 0.1 );
+        padding-left: 5px;
+    }
+
+    label {
+        margin: 0;
+        padding-right: 2px;
+    }
+
+    cell {
+        transition: all 150ms ease;
+
+        &:intro {
+            transform: scaleY( 0 );
+            opacity: 0;
+        }
+
+        &:outro {
+            transform: scaleY( 0 );
+            opacity: 0;
+        }
+    }
+}
