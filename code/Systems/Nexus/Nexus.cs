@@ -12,13 +12,11 @@ namespace GoldRush.Nexus;
 [Title( "Nexus" ), Category( "Gameplay" )]
 public partial class Nexus : AnimatedEntity
 {
-	[Property( Title = "The team ID this nexus corresponds to." )]
-	public int TeamId { get; set; }
+	[Property( Title = "The team ID this nexus corresponds to." ), Net]
+	public string TeamId { get; set; }
 
 	[Property( "The max health of the nexus" )]
 	public int MaxHealth { get; set; }
-
-
 
 	public delegate void OnDeathEvent( Nexus nexus );
 	public event OnDeathEvent OnDeath;
@@ -27,8 +25,11 @@ public partial class Nexus : AnimatedEntity
 	public override void Spawn()
 	{
 		base.Spawn();
+		SetModel( "models/environment/nexus/spawnnexus.vmdl" );
 		Transmit = TransmitType.Always;
 		Health = MaxHealth;
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
+		Tags.Add( "solid" );
 
 	}
 
@@ -42,8 +43,6 @@ public partial class Nexus : AnimatedEntity
 
 	public override void TakeDamage( DamageInfo info )
 	{
-		base.TakeDamage( info );
-
 		//If the attacker is a player and has a team component
 		if ( info.Attacker is Player player && player.Team != null )
 		{
