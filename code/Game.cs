@@ -7,6 +7,7 @@ global using System;
 global using System.Collections.Generic;
 global using System.ComponentModel;
 global using System.Linq;
+using GoldRush.Teams;
 
 namespace GoldRush;
 
@@ -31,21 +32,33 @@ public partial class GoldRushGameManager : GameManager
 		client.Pawn = pawn;
 		pawn.Respawn();
 
-		// Get all of the spawnpoints
-		var spawnpoints = Entity.All.OfType<SpawnPoint>();
+		Chat.AddChatEntry( To.Everyone, client.Name, "joined the game", client.SteamId, true );
+	}
 
-		// chose a random one
-		var randomSpawnPoint = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
-
-		// if it exists, place the pawn there
-		if ( randomSpawnPoint != null )
+	public override void MoveToSpawnpoint( Entity pawn )
+	{
+		if ( pawn is not Player player )
 		{
-			var tx = randomSpawnPoint.Transform;
-			tx.Position = tx.Position + Vector3.Up * 10.0f; // raise it up
-			pawn.Transform = tx;
+			base.MoveToSpawnpoint( pawn );
+			return;
 		}
 
-		Chat.AddChatEntry( To.Everyone, client.Name, "joined the game", client.SteamId, true );
+		var spawnTransform = Transform.Zero;
+
+		if ( !All.OfType<TeamSpawnPoint>().Any() )
+		{
+			Log.Info( $"no team transform" );
+			spawnTransform = All.OfType<SpawnPoint>().OrderBy( x => Guid.NewGuid() ).FirstOrDefault().Transform;
+		}
+		else
+		{
+			Log.Info( $"team spawn" );
+			spawnTransform = All.OfType<TeamSpawnPoint>().OrderBy( x => Guid.NewGuid() ).Where( x => x.Team.Id == player.Team.Resource.Id ).FirstOrDefault().Transform;
+		}
+
+		spawnTransform = spawnTransform.WithPosition( spawnTransform.Position += Vector3.Up * 10.0f );
+		player.Transform = spawnTransform;
+		player.ResetInterpolation();
 	}
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
