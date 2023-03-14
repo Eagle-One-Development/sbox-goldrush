@@ -31,8 +31,12 @@ public partial class Nexus : AnimatedEntity
 	[Event.Client.Frame]
 	public void DrawDebugInfo()
 	{
-		DebugOverlay.Text( $"{Health}", Position + Vector3.Up * 10, Color.White );
-		DebugOverlay.Text( $"{Team.Id}", Position + Vector3.Up * 20, Color.White );
+		DebugOverlay.Text(
+			$"Team: {Team.Id}\n" +
+			$"Health: {Health}\n",
+			Position + Vector3.Up * 10,
+			Color.White
+		);
 	}
 
 	public override void TakeDamage( DamageInfo info )
