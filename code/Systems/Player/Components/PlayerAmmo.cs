@@ -9,11 +9,16 @@ public enum AmmoType
 
 public partial class PlayerAmmo : GameComponent<Player>, ISingletonComponent
 {
-	[Net] public IDictionary<AmmoType, int> Ammo { get; set; } = new Dictionary<AmmoType, int>();
+	[Net] private IDictionary<AmmoType, int> AmmoInventory { get; set; } = new Dictionary<AmmoType, int>();
+
+	public void Clear()
+	{
+		AmmoInventory.Clear();
+	}
 
 	public bool HasAmmo( AmmoType type )
 	{
-		if ( Ammo.TryGetValue( type, out var ammo ) )
+		if ( AmmoInventory.TryGetValue( type, out var ammo ) )
 			return ammo > 0;
 		return false;
 	}
@@ -46,27 +51,27 @@ public partial class PlayerAmmo : GameComponent<Player>, ISingletonComponent
 
 	public int GetAmmo( AmmoType type )
 	{
-		if ( Ammo.TryGetValue( type, out var ammo ) )
+		if ( AmmoInventory.TryGetValue( type, out var ammo ) )
 			return ammo;
 		return 0;
 	}
 
 	public void SetAmmo( AmmoType type, int amount )
 	{
-		Ammo[type] = amount;
+		AmmoInventory[type] = amount;
 	}
 
 	public void AddAmmo( AmmoType type, int amount )
 	{
-		if ( Ammo.ContainsKey( type ) )
-			Ammo[type] += amount;
-		else Ammo[type] = amount;
+		if ( AmmoInventory.ContainsKey( type ) )
+			AmmoInventory[type] += amount;
+		else AmmoInventory[type] = amount;
 	}
 
 	public void SubAmmo( AmmoType type, int amount )
 	{
-		if ( Ammo.ContainsKey( type ) )
-			Ammo[type] -= amount;
+		if ( AmmoInventory.ContainsKey( type ) )
+			AmmoInventory[type] -= amount;
 	}
 
 	[ConCmd.Admin( "gr_give_ammo" )]
