@@ -18,8 +18,7 @@ public partial class Nexus : AnimatedEntity
 	[Property( "The max health of the nexus" )]
 	public int MaxHealth { get; set; }
 
-	[Net]
-	public int Health { get; set; }
+
 
 	public delegate void OnDeathEvent( Nexus nexus );
 	public event OnDeathEvent OnDeath;
@@ -29,14 +28,16 @@ public partial class Nexus : AnimatedEntity
 	{
 		base.Spawn();
 		Transmit = TransmitType.Always;
+		Health = MaxHealth;
 
 	}
 
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public void DrawDebugInfo()
 	{
-
+		DebugOverlay.Text( $"{Health}", Position + Vector3.Up * 10, Color.White );
+		DebugOverlay.Text( $"{TeamId}", Position + Vector3.Up * 20, Color.White );
 	}
 
 	public override void TakeDamage( DamageInfo info )
@@ -47,7 +48,7 @@ public partial class Nexus : AnimatedEntity
 		if ( info.Attacker is Player player && player.Team != null )
 		{
 			//If the player's team is the same as the nexus's team
-			if ( player.Team.Id == TeamId )
+			if ( player.Team.Resource.Id == TeamId.ToString() )
 			{
 				//Don't take damage
 				return;
