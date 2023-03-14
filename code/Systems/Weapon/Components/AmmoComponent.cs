@@ -164,6 +164,7 @@ public static class WeaponAmmoExtension
 {
 	public static bool HasAmmo( this Weapon weapon )
 	{
+		if ( weapon is null ) return false;
 		return weapon.Components.TryGet<AmmoComponent>( out var _ );
 	}
 
@@ -178,6 +179,7 @@ public static class WeaponAmmoExtension
 
 	public static AmmoType GetAmmoType( this Weapon weapon )
 	{
+		if ( weapon is null ) return AmmoType.Generic;
 		if ( !weapon.Components.TryGet<AmmoComponent>( out var component ) )
 			throw new Exception( $"Cannot get AmmoType for weapon without AmmoComponent!" );
 
