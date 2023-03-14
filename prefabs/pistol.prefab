@@ -179,7 +179,7 @@
           },
           "Type": {
             "Type": "AmmoType",
-            "Value": "\u0022Generic\u0022"
+            "Value": "\u0022Pistol\u0022"
           },
           "ReloadSound": {
             "Type": "String",
