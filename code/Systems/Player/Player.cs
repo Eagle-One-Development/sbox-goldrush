@@ -147,6 +147,12 @@ public partial class Player : AnimatedEntity
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pistol.prefab" ) );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/smg.prefab" ), false );
 
+		Ammo.Clear();
+
+		Ammo.AddAmmo( AmmoType.Generic, 1000 );
+		Ammo.AddAmmo( AmmoType.Pistol, 100 );
+		Ammo.AddAmmo( AmmoType.Smg, 300 );
+
 		SetupClothing();
 
 		GameManager.Current?.MoveToSpawnpoint( this );
