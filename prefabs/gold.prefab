@@ -19,11 +19,51 @@
           },
           "Speed": {
             "Type": "Single",
-            "Value": "90"
+            "Value": "180"
           },
           "Height": {
             "Type": "Single",
+            "Value": "4"
+          },
+          "RotationSpeed": {
+            "Type": "Single",
+            "Value": "90"
+          },
+          "HeightSpeed": {
+            "Type": "Single",
+            "Value": "2"
+          },
+          "ReloadTime": {
+            "Type": "Single",
             "Value": "0"
+          },
+          "ClipSize": {
+            "Type": "Int32",
+            "Value": "0"
+          },
+          "Type": {
+            "Type": "AmmoType",
+            "Value": "\u0022Generic\u0022"
+          }
+        }
+      },
+      {
+        "Guid": "2f4e89eb-d1b9-4600-976f-d9225fb7772f",
+        "Class": "PickupTriggerComponent",
+        "Keys": {
+          "Radius": {
+            "Type": "Single",
+            "Value": "16"
+          },
+          "_name": {
+            "Value": "\u0022Pickup Trigger\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "EventName": {
+            "Type": "String",
+            "Value": "\u0022gold.pickup\u0022"
           }
         }
       }
