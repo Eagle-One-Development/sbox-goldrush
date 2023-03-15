@@ -15,7 +15,7 @@
 						[
 							{
 								from = "redsuit.vmat"
-								to = "materials/clothing/default_vest_01.vmat"
+								to = "materials/clothing/redsuit.vmat"
 							},
 							{
 								from = "pickaxetex.vmat"
@@ -23,7 +23,7 @@
 							},
 							{
 								from = "redsuit.001.vmat"
-								to = "materials/clothing/default_vest_01.vmat"
+								to = "materials/clothing/redsuit.vmat"
 							},
 						]
 						use_global_default = false
