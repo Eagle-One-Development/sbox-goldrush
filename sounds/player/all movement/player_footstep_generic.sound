@@ -1,0 +1,37 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		UI = true
+		Volume = 0.5
+		VolumeRandom = 0.02
+		Pitch = 1
+		PitchRandom = 0.12
+		Decibels = 70
+		Sounds = 
+		[
+			resource:"sounds/player/all movement/player_footstep_running_01.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_02.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_03.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_04.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_05.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_06.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_07.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_08.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_09.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_10.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_11.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_12.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_13.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_14.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_15.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_16.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_17.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_18.vsnd",
+			resource:"sounds/player/all movement/player_footstep_running_19.vsnd",
+		]
+		SelectionMode = "Forward"
+		MaximumDistance = 1143.9335
+		MinimumDistance = 57.196674
+	}
+}
