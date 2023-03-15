@@ -71,7 +71,7 @@
     "Keys": {
       "Model": {
         "Type": "Model",
-        "Value": "\u0022fish.vmdl\u0022"
+        "Value": "\u0022models/pickup/nugget/nugget.vmdl\u0022"
       },
       "_name": {
         "Value": "\u0022Temporary Fish Model\u0022"
