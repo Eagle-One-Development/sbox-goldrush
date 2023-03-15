@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "simple.vfx"
+	shader "simple.shader"
 
 	//---- PBR ----
 	F_METALNESS_TEXTURE 1
@@ -13,7 +13,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/weapons/textures/coil_touched_color.png"
+	TextureColor "models/weapons/coil_touched_color.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -21,18 +21,14 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
 	//---- Metalness ----
-	TextureMetalness "models/weapons/textures/coil_touched_metal.png"
+	TextureMetalness "models/weapons/coil_touched_metal.png"
 
 	//---- Normal ----
-	TextureNormal "models/weapons/textures/coil_touched_normal.png"
+	TextureNormal "models/weapons/coil_touched_normal.png"
 
 	//---- Roughness ----
-	TextureRoughness "models/weapons/textures/coil_touched_rough.png"
+	TextureRoughness "models/weapons/coil_touched_rough.png"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
