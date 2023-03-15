@@ -29,6 +29,16 @@ public partial class Nexus : AnimatedEntity
 	}
 
 	[Event.Client.Frame]
+	public void Frame()
+	{
+		if ( SceneObject is null )
+			return;
+
+		SceneObject.Batchable = false;
+		SceneObject.Attributes.Set( "gr_team_tint", Team.Color );
+	}
+
+	[Event.Client.Frame]
 	public void DrawDebugInfo()
 	{
 		DebugOverlay.Text(

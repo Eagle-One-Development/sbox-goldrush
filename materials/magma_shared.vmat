@@ -14,7 +14,7 @@ Layer0
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 1.000000]"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
 	TextureColor "[0.498039 0.498039 0.498039 0.000000]"
 
 	//---- Fade ----
@@ -49,6 +49,7 @@ Layer0
 
 	DynamicParams
 	{
+		g_vColorTint "gr_team_tint"
 		g_vSelfIllumTint "TeamColor\n"
 	}
 }
