@@ -31,8 +31,9 @@ public partial class PlayerResources : GameComponent<Player>, ISingletonComponen
 	}
 
 	[OnGameEvent( "gold.pickup" )]
-	private void OnGoldPickup()
+	private void OnGoldPickup( Entity goldEntity, string quantity )
 	{
-		Gold += 10;
+		goldEntity.Delete();
+		Gold += int.Parse( quantity );
 	}
 }
