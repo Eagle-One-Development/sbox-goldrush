@@ -5,6 +5,7 @@ public partial class PickupTriggerComponent : EntityComponent
 {
 	[Prefab, Net] public float Radius { get; set; } = 16f;
 	[Prefab, Net] public string EventName { get; set; }
+	[Prefab, Net] public List<string> EventParameters { get; set; }
 
 	private PickupTrigger _pickupTrigger;
 
@@ -19,7 +20,16 @@ public partial class PickupTriggerComponent : EntityComponent
 		_pickupTrigger.OnTouch += ( e ) =>
 		{
 			if ( e is Player player )
-				player.RunGameEvent( EventName );
+			{
+				var parameters = new List<object>
+				{
+					Entity
+				};
+
+				parameters.AddRange( EventParameters );
+
+				player.RunGameEvent( EventName, parameters.ToArray() );
+			}
 		};
 	}
 }

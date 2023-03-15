@@ -64,6 +64,10 @@
           "EventName": {
             "Type": "String",
             "Value": "\u0022gold.pickup\u0022"
+          },
+          "EventParameters": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022100\u0022\r\n]"
           }
         }
       }
