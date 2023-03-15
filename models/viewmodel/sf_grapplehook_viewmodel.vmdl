@@ -1,0 +1,416 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "redsuit.vmat"
+								to = "materials/clothing/default_vest_01.vmat"
+							},
+							{
+								from = "magma.vmat"
+								to = "materials/magma_shared.vmat"
+							},
+							{
+								from = "grapplinghook.vmat"
+								to = "materials/weapons/grapplinghook.vmat"
+							},
+							{
+								from = "redsuit.001.vmat"
+								to = "materials/clothing/default_vest_01.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "grapple"
+						filename = "models/viewmodel/viewmodel_anims/sf_grapplehook.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = 
+							[
+								"Arms",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "Folder"
+						name = "grapple"
+						children = 
+						[
+							{
+								_class = "AnimFile"
+								name = "grapple_draw"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/viewmodel/viewmodel_anims/sf_grapplinghook_anims.fbx"
+								start_frame = 20
+								end_frame = 36
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "grapple_connect"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/viewmodel/viewmodel_anims/sf_grapplinghook_anims.fbx"
+								start_frame = 60
+								end_frame = 75
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "grapple_disconnect"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/viewmodel/viewmodel_anims/sf_grapplinghook_anims.fbx"
+								start_frame = 200
+								end_frame = 220
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "grapple_fire"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/viewmodel/viewmodel_anims/sf_grapplinghook_anims.fbx"
+								start_frame = 230
+								end_frame = 250
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "grapple_holster"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/viewmodel/viewmodel_anims/sf_grapplinghook_anims.fbx"
+								start_frame = 268
+								end_frame = 280
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "grapple_idle"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/viewmodel/viewmodel_anims/sf_grapplinghook_anims.fbx"
+								start_frame = 261
+								end_frame = 261
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "grapple_active"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/viewmodel/viewmodel_anims/sf_grapplinghook_anims.fbx"
+								start_frame = 80
+								end_frame = 172
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+						]
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "grapple_bonemask"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "arm_upper_L"
+								weight = 1.0
+							},
+							{
+								bone = "axle"
+								weight = 0.0
+							},
+							{
+								bone = "body"
+								weight = 1.0
+							},
+							{
+								bone = "button"
+								weight = 1.0
+							},
+							{
+								bone = "clavicle_R"
+								weight = 0.0
+							},
+							{
+								bone = "gun"
+								weight = 0.0
+							},
+							{
+								bone = "hammer"
+								weight = 0.0
+							},
+							{
+								bone = "hammer_back"
+								weight = 0.0
+							},
+							{
+								bone = "magazine_full"
+								weight = 0.0
+							},
+							{
+								bone = "spine_2"
+								weight = 1.0
+							},
+							{
+								bone = "trigger"
+								weight = 0.0
+							},
+							{
+								bone = "vent_l"
+								weight = 0.0
+							},
+							{
+								bone = "vent_r"
+								weight = 0.0
+							},
+							{
+								bone = "wire"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "clear_weights"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "clavicle_R"
+								weight = 0.0
+							},
+							{
+								bone = "spine_2"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "grapple_particle"
+						parent_bone = "body"
+						relative_origin = [ -1.691856, -17.750622, 18.472435 ]
+						relative_angles = [ -87.108841, 177.085648, -169.983658 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "grapple_lookat"
+						parent_bone = "hand_L"
+						relative_origin = [ -15.540173, 74.270477, -7.445084 ]
+						relative_angles = [ 10.713497, 101.896538, -10.121284 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "grapple"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"grapple",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+				]
+				disabled = true
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "LookAtChain"
+						name = "grapple_lookat"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "hand_L"
+									weight = 1.0
+								},
+								{
+									name = "body"
+									weight = 0.946
+								},
+								{
+									name = "button"
+									weight = 0.928
+								},
+								{
+									name = "trigger_grapple"
+									weight = 0.839
+								},
+								{
+									name = "arm_lower_L"
+									weight = 0.607
+								},
+								{
+									name = "arm_upper_L"
+									weight = 0.25
+								},
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "BoneMarkupList"
+				bone_cull_type = "None"
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "animgraphs/sf_grapple_viewmodel.vanmgrph"
+		base_model_name = ""
+	}
+}

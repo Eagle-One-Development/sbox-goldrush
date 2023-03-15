@@ -20,11 +20,11 @@
 							},
 							{
 								from = "lava.vmat"
-								to = "materials/default/white.vmat"
+								to = "materials/magma_shared.vmat"
 							},
 							{
 								from = "magma.vmat"
-								to = "materials/default/white.vmat"
+								to = "materials/magma_shared.vmat"
 							},
 							{
 								from = "nexuschamber.vmat"
@@ -40,8 +40,8 @@
 						remaps = 
 						[
 							{
-								from = "materials/environment/magma.vmat"
-								to = "materials/environment/magma_purple.vmat"
+								from = "materials/default/white.vmat"
+								to = "materials/magma_shared.vmat"
 							},
 						]
 					},

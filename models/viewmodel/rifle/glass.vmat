@@ -1,0 +1,66 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "sbox_glass.vfx"
+
+	//---- Glass Dirt Maps ----
+	F_GLASS_DIRT 1
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+
+	//---- Ambient Occlusion ----
+	TextureAmbientOcclusion "[0.000000 0.000000 0.000000 1.000000]"
+
+	//---- Color ----
+	g_flModelTintAmount "0.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "[0.000000 0.000000 0.000000 0.000000]"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Glass ----
+	g_flColorExponent "1.524"
+	g_flColorReflectance "0.000"
+	g_flEmissionBoost "2.000"
+	g_flExponent "2.388"
+	g_flGlassZoom "0.500"
+	g_flInnerRefraction "0.179"
+	g_flOuterRefraction "1.124"
+	g_flReflectance "0.000"
+	g_flRefractScale "16.000"
+	g_vInnerColor "[1.000000 0.870588 0.741176 1.000000]"
+	g_vOuterColor "[0.141176 0.074510 0.000000 1.000000]"
+	TextureDirtAmbientOcclusion "materials/default/default_ao.tga"
+	TextureDirtColor "models/viewmodel/sf_viewmodel/glass_color.png"
+	TextureDirtMetalness "materials/default/default_metal.tga"
+	TextureDirtNormal "materials/default/default_normal.tga"
+	TextureDirtRoughness "materials/default/default_rough.tga"
+	TextureDirtTranslucency "models/viewmodel/sf_viewmodel/glass_sight.png"
+	TextureMetalness "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness "[0.000000 0.000000 0.000000 1.000000]"
+
+	//---- Lighting ----
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
+
+	//---- Metalness ----
+	g_flMetalness "1.000"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
+	g_flOpaqueness "0.000"
+	TextureTranslucency "[1.000000 1.000000 1.000000 0.000000]"
+}

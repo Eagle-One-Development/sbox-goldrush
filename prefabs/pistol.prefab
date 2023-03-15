@@ -141,7 +141,7 @@
           },
           "ViewModelPath": {
             "Type": "String",
-            "Value": "\u0022weapons/rust_pistol/v_rust_pistol.vmdl\u0022"
+            "Value": "\u0022models/viewmodel/sf_pistol_viewmodel.vmdl\u0022"
           },
           "_name": {
             "Value": "\u0022Pistol View Model\u0022"
@@ -222,7 +222,7 @@
       },
       "Model": {
         "Type": "Model",
-        "Value": "\u0022weapons/rust_pistol/rust_pistol.vmdl\u0022"
+        "Value": "\u0022models/weapons/sf_tempered_tapper.vmdl\u0022"
       }
     }
   }

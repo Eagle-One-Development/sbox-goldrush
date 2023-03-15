@@ -1,0 +1,123 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "bullet_tempered.vmat"
+								to = "materials/weapons/bullet_tempered.vmat"
+							},
+							{
+								from = "tempered_tapper.vmat"
+								to = "materials/weapons/tempered_tapper.vmat"
+							},
+							{
+								from = "lava.vmat"
+								to = "materials/magma_shared.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "gun"
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ 0.056533, 0.035368, 0.021348 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 2.622627, 7.145287, 1.85366 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "gun"
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ -3.655724, 5.606808, 0.121481 ]
+						angles = [ 0.000014, -22.360231, 0.00001 ]
+						dimensions = [ 14.708056, 3.300699, 1.8135 ]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/weapons/src/sf_tempered_tapper.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.15
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "hold_r"
+						origin = [ 0.0, -5.216818, 0.701885 ]
+						angles = [ -0.0, 90.0, 0.0 ]
+						do_not_discard = true
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "muzzle"
+						parent_bone = "gun"
+						relative_origin = [ -10.431519, 8.764633, 0.0 ]
+						relative_angles = [ 0.277405, 156.748184, -178.390533 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "eject"
+						parent_bone = "gun"
+						relative_origin = [ -0.60248, 5.686177, 0.0 ]
+						relative_angles = [ 23.759253, 82.895798, -15.068163 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

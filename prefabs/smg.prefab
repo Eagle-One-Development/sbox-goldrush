@@ -141,7 +141,7 @@
           },
           "ViewModelPath": {
             "Type": "String",
-            "Value": "\u0022weapons/rust_smg/v_rust_smg.vmdl\u0022"
+            "Value": "\u0022models/viewmodel/sf_smg_viewmodel.vmdl\u0022"
           },
           "_name": {
             "Value": "\u0022SMG View Model\u0022"
@@ -214,7 +214,7 @@
       },
       "Model": {
         "Type": "Model",
-        "Value": "\u0022weapons/rust_smg/rust_smg.vmdl\u0022"
+        "Value": "\u0022models/weapons/sf_frizzler.vmdl\u0022"
       }
     }
   }
