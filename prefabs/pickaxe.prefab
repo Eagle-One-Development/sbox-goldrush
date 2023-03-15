@@ -119,7 +119,7 @@
       },
       "HoldType": {
         "Type": "WeaponHoldType",
-        "Value": "\u0022Swing\u0022"
+        "Value": "\u0022Item\u0022"
       },
       "Handedness": {
         "Type": "WeaponHandedness",
@@ -139,6 +139,10 @@
       },
       "_tags": {
         "Value": "\u0022\u0022"
+      },
+      "HoldTypePose": {
+        "Type": "Single",
+        "Value": "0"
       }
     }
   }
