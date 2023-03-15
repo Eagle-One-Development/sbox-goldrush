@@ -41,32 +41,15 @@ public partial class Drill : AnimatedEntity
 		Active = true;
 	}
 
-	[Event.Tick]
-	public void Tick()
-	{
-
-	}
-
 	[Event.Client.Frame]
 	public void ClientSideEffect()
 	{
 		//Get a bone named 'drill'
 		var bone = GetBoneTransform( "drill" );
 
-
-
-		Log.Info( bone );
-
 		//Rotate the drill on its y axis
 		bone.Rotation = Rotation.From( 0, Time.Now * 100, 0 );
 
 		SetBoneTransform( "drill", bone );
-
-
 	}
-
-
-
-
-
 }
