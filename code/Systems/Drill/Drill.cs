@@ -24,6 +24,13 @@ public partial class Drill : AnimatedEntity
 	/// </summary>
 	public int GoldReward { get; set; } = 100;
 
+	/// <summary>
+	/// Whether or not we're currently active
+	/// </summary>
+	/// <value></value>
+	[Net]
+	public bool Active { get; set; }
+
 	override public void Spawn()
 	{
 		base.Spawn();
@@ -31,7 +38,34 @@ public partial class Drill : AnimatedEntity
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 		Tags.Add( "solid" );
 		Tags.Add( "drill" );
+		Active = true;
 	}
+
+	[Event.Tick]
+	public void Tick()
+	{
+
+	}
+
+	[Event.Client.Frame]
+	public void ClientSideEffect()
+	{
+		//Get a bone named 'drill'
+		var bone = GetBoneTransform( "drill" );
+
+
+
+		Log.Info( bone );
+
+		//Rotate the drill on its y axis
+		bone.Rotation = Rotation.From( 0, Time.Now * 100, 0 );
+
+		SetBoneTransform( "drill", bone );
+
+
+	}
+
+
 
 
 
