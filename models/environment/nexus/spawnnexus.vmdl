@@ -28,7 +28,7 @@
 							},
 							{
 								from = "nexuschamber.vmat"
-								to = "models/environment/nexus/textures/nexus.vmat"
+								to = "materials/environment/nexus/nexus.vmat"
 							},
 						]
 						use_global_default = false

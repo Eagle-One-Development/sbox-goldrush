@@ -15,7 +15,7 @@
 						[
 							{
 								from = "sphere.vmat"
-								to = "models/pickup/nugget/src/nugget.vmat"
+								to = "materials/pickup/nugget/nugget.vmat"
 							},
 						]
 						use_global_default = false
@@ -29,7 +29,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/pickup/nugget/nugget.fbx"
+						filename = "models/pickup/nugget/src/nugget.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 0.3937

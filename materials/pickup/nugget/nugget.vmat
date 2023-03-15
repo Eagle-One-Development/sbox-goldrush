@@ -11,12 +11,12 @@ Layer0
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "models/pickup/nugget/src/defaultmaterial_ao.png"
+	TextureAmbientOcclusion "materials/pickup/nugget/nugget_ao.png"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/pickup/nugget/src/defaultmaterial_color.png"
+	TextureColor "materials/pickup/nugget/nugget_color.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -25,13 +25,13 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Metalness ----
-	TextureMetalness "models/pickup/nugget/src/defaultmaterial_metal.png"
+	TextureMetalness "materials/pickup/nugget/nugget_metal.png"
 
 	//---- Normal ----
-	TextureNormal "models/pickup/nugget/src/defaultmaterial_normal.png"
+	TextureNormal "materials/pickup/nugget/nugget_normal.png"
 
 	//---- Roughness ----
-	TextureRoughness "models/pickup/nugget/src/defaultmaterial_rough.png"
+	TextureRoughness "materials/pickup/nugget/nugget_rough.png"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
