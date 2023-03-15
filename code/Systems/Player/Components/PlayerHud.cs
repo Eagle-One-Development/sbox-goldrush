@@ -9,8 +9,8 @@ public partial class PlayerHud : GameComponent<Player>, ISingletonComponent
 	}
 
 	[OnGameEvent( "player.gotkill" )]
-	public void OnPlayerGotKill()
+	public void OnPlayerGotKill( string playerName )
 	{
-		EventFeed.AddEvent( To.Single( Entity ), "Eliminated Poopface", 0 );
+		EventFeed.AddEvent( To.Single( Entity ), $"Eliminated {playerName}", 0 );
 	}
 }

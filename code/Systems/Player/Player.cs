@@ -233,7 +233,7 @@ public partial class Player : AnimatedEntity
 					RunGameEvent( "player.waskilled" );
 
 					if ( info.Attacker is Player attackingPlayer )
-						attackingPlayer.RunGameEvent( "player.gotkill" );
+						attackingPlayer.RunGameEvent( "player.gotkill", Client.Name );
 				}
 			}
 		}
