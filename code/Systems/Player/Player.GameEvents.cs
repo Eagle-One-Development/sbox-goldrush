@@ -19,7 +19,18 @@ public partial class Player
 		eventName = eventName.ToLowerInvariant();
 
 		var components = CollectComponents();
-		components.ForEach( x => RunEventOnComponent( eventName, x ) );
+		components.ForEach( x => RunEventOnComponent( eventName, x, Array.Empty<object>() ) );
+
+		if ( DebugGameEvents )
+			DebugGameEvent( eventName );
+	}
+
+	public void RunGameEvent( string eventName, params object[] parameters )
+	{
+		eventName = eventName.ToLowerInvariant();
+
+		var components = CollectComponents();
+		components.ForEach( x => RunEventOnComponent( eventName, x, parameters ) );
 
 		if ( DebugGameEvents )
 			DebugGameEvent( eventName );
@@ -53,9 +64,7 @@ public partial class Player
 	/// Invokes OnGameEvent on a given component as well as methods marked with 
 	/// the [OnGameEvent] attribute using the given event name.
 	/// </summary>
-	/// <param name="eventName"></param>
-	/// <param name="target"></param>
-	private void RunEventOnComponent( string eventName, IGameComponent target )
+	private void RunEventOnComponent( string eventName, IGameComponent target, object[] parameters )
 	{
 		if ( target == null )
 			return;
@@ -64,11 +73,20 @@ public partial class Player
 
 		// This is probably slow as balls, we will likely need to swap this out for
 		// something more performant later.
-		TypeLibrary.GetType( target.GetType() )
+		var methods = TypeLibrary.GetType( target.GetType() )
 			.Methods
 			.Where( x => x.GetCustomAttribute<OnGameEventAttribute>()?.EventName == eventName )
-			.ToList()
-			.ForEach( x => x.Invoke( target ) );
+			.ToList();
+
+		foreach ( var method in methods )
+		{
+			if ( method.Parameters.Length == 0 )
+				method.Invoke( target );
+			else if ( method.Parameters.Length != parameters.Length )
+				Log.Error( "Tried to invoke event with incorrect number of parameters." );
+			else
+				method.Invoke( target, parameters );
+		}
 	}
 
 	int _debugLine;
