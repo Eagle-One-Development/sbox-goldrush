@@ -50,6 +50,9 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( Player?.Health, Weapon, Weapon.GetAmmo(), Player.Ammo.GetAmmo( Weapon.GetAmmoType() ));
+        if (Weapon.HasAmmo())
+            return HashCode.Combine( Player?.Health, Weapon, Weapon.GetAmmo(), Player.Ammo.GetAmmo( Weapon.GetAmmoType() ) );
+            
+        return HashCode.Combine( Player?.Health, Weapon );
     }
 }
