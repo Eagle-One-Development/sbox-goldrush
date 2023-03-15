@@ -75,7 +75,7 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 	public static void DoReloadEffects()
 	{
 		Game.AssertClient();
-		WeaponViewModel.Current?.SetAnimParameter( "reload", true );
+		WeaponViewModel.Current?.SetAnimParameter( "b_reload", true );
 	}
 
 	public override void Simulate( IClient cl, Player player )

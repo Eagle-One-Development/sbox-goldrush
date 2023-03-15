@@ -58,7 +58,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 	public static void DoShootEffects()
 	{
 		Game.AssertClient();
-		WeaponViewModel.Current?.SetAnimParameter( "fire", true );
+		WeaponViewModel.Current?.SetAnimParameter( "b_attack", true );
 	}
 
 	public IEnumerable<TraceResult> TraceBullet( Vector3 start, Vector3 end, float radius )
