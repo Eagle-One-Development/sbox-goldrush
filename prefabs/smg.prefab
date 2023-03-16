@@ -97,7 +97,7 @@
           },
           "GlobalPositionOffset": {
             "Type": "Vector3",
-            "Value": "\u0022-10.5,7.05,-1.95\u0022"
+            "Value": "\u00220,0,0\u0022"
           },
           "GlobalAngleOffset": {
             "Type": "Angles",
@@ -177,6 +177,30 @@
             "Type": "String",
             "Value": "\u0022weapons/rust_smg/sounds/rust_smg.reloadstart.sound\u0022"
           }
+        }
+      },
+      {
+        "Guid": "8b5fa99c-82fc-48d9-a0f2-1620e0533de9",
+        "Class": "Purchasable",
+        "Keys": {
+          "Cost": {
+            "Type": "Int32",
+            "Value": "100"
+          },
+          "_name": {
+            "Value": "\u0022Purchasable\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "60a35498-bfd9-4721-8d39-bb82243dc8af",
+        "Class": "Aim",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022Aim\u0022"
+          },
+          "_tags": {}
         }
       }
     ],

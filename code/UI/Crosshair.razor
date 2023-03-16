@@ -86,7 +86,8 @@
         var player = Game.LocalPawn as Player;
         var weapon = player?.Inventory?.ActiveWeapon;
         var canFire = weapon?.CanFire(player) ?? false;
-        var isVisible = canFire;
+        var isReloading = weapon?.IsReloading ?? false;
+		var isVisible = canFire && !isReloading;
 
         if (player.Controller == null)
         {

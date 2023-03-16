@@ -78,12 +78,28 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		WeaponViewModel.Current?.SetAnimParameter( "b_reload", true );
 	}
 
+	[ClientRpc]
+	public static void StopReloadEffects()
+	{
+		Game.AssertClient();
+		WeaponViewModel.Current?.SetAnimParameter( "deploy", true );
+	}
+
 	public override void Simulate( IClient cl, Player player )
 	{
 		base.Simulate( cl, player );
 
-		if ( IsReloading && TimeSinceActivated > ReloadTime )
-			FinishReload();
+		//
+		// Check for reload exit conditions
+		//
+		if ( IsReloading )
+		{
+			if ( !Weapon.CanReload( player ) )
+				ForceEndReload( player );
+
+			if ( TimeSinceActivated > ReloadTime )
+				FinishReload();
+		}
 
 		// ammo dropping
 		if ( player.Ammo.HasAmmo( Type ) && Input.Pressed( InputButton.Drop ) && Game.IsServer )
@@ -99,6 +115,16 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		Ammo += ammo;
 
 		IsReloading = false;
+	}
+
+	private void ForceEndReload( Player player )
+	{
+		//
+		// Even though we disable player sprinting, we should bail in case that
+		// check fails somewhere and the player does manage to sprint.
+		//
+		IsReloading = false;
+		StopReloadEffects( To.Single( player ) );
 	}
 
 	public void DropAmmo( Player player, int amount )

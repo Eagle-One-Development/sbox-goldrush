@@ -17,6 +17,9 @@ public partial class SprintMechanic : PlayerControllerMechanic
 		if ( !Input.Down( InputButton.Run ) ) return false;
 		if ( Player.MoveInput.Length == 0 ) return false;
 
+		// We don't want the player to sprint while reloading
+		if ( Player.ActiveWeapon.IsReloading ) return false;
+
 		return true;
 	}
 }

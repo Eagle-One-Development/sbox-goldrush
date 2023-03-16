@@ -12,6 +12,10 @@ public partial class Weapon : AnimatedEntity
 	public WeaponViewModel ViewModelEntity { get; protected set; }
 	public Player Player => Owner as Player;
 
+	private Aim AimComponent { get; }
+	public bool IsAiming => AimComponent?.IsActive ?? false;
+	public bool IsReloading => Components.Get<AmmoComponent>()?.IsReloading ?? false;
+
 	public override void Spawn()
 	{
 		EnableHideInFirstPerson = true;

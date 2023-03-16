@@ -26,6 +26,8 @@ public partial class WeaponViewModel
 	Vector3 realPositionOffset;
 	Rotation realRotationOffset;
 
+	float interpolatedFovMultiplier = 1.0f;
+
 	protected void ApplyPositionOffset( Vector3 offset, float delta )
 	{
 		var left = Camera.Rotation.Left;
@@ -175,6 +177,21 @@ public partial class WeaponViewModel
 		Rotation *= realRotationOffset;
 		Position += realPositionOffset;
 
-		Camera.Main.SetViewModelCamera( 85f, 1, 2048 );
+		Camera.Main.SetViewModelCamera( EvaluateFieldOfView(), 1, 2048 );
+	}
+
+	private float EvaluateFieldOfView()
+	{
+		const float baseFieldOfView = 85f;
+		float fovMultiplier = 1.0f;
+
+		if ( Weapon.IsAiming )
+			fovMultiplier = 0.8f;
+
+		// Interpolate so that FOV transitions smoothly
+		interpolatedFovMultiplier = interpolatedFovMultiplier.LerpTo( fovMultiplier, 10f * Time.Delta );
+
+		float fieldOfView = baseFieldOfView * interpolatedFovMultiplier;
+		return fieldOfView;
 	}
 }
