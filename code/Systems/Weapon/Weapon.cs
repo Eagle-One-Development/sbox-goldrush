@@ -12,7 +12,7 @@ public partial class Weapon : AnimatedEntity
 	public WeaponViewModel ViewModelEntity { get; protected set; }
 	public Player Player => Owner as Player;
 
-	public bool IsAiming => Components.Get<Aim>()?.IsActive ?? false;
+	public bool IsAiming => Components.Get<Aim>()?.IsActive ?? true;
 	public bool IsReloading => Components.Get<AmmoComponent>()?.IsReloading ?? false;
 
 	public override void Spawn()

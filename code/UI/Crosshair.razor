@@ -87,7 +87,8 @@
         var weapon = player?.Inventory?.ActiveWeapon;
         var canFire = weapon?.CanFire(player) ?? false;
         var isReloading = weapon?.IsReloading ?? false;
-		var isVisible = canFire && !isReloading;
+        var isAiming = weapon?.IsAiming ?? false;
+		var isVisible = canFire && !isReloading && !isAiming;
 
         if (player.Controller == null)
         {
