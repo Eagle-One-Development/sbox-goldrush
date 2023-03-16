@@ -157,7 +157,7 @@
         "Keys": {
           "ReloadTime": {
             "Type": "Single",
-            "Value": "3.8"
+            "Value": "2.2"
           },
           "ClipSize": {
             "Type": "Int32",
@@ -190,7 +190,9 @@
           "_name": {
             "Value": "\u0022Purchasable\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       },
       {
@@ -200,7 +202,9 @@
           "_name": {
             "Value": "\u0022Aim\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
