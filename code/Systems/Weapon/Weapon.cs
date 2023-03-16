@@ -87,6 +87,7 @@ public partial class Weapon : AnimatedEntity
 		var vm = new WeaponViewModel( this );
 		vm.Model = Model.Load( comp.ViewModelPath );
 		ViewModelEntity = vm;
+		ViewModelEntity.SetAnimParameter( "deploy", true );
 	}
 
 	[ClientRpc]
