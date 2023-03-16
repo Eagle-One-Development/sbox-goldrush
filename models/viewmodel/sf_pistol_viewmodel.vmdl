@@ -343,6 +343,18 @@
 				_class = "BoneMarkupList"
 				bone_cull_type = "None"
 			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "SkeletonFile"
+						name = "Skeleton"
+						filename = "models/viewmodel/viewmodel_anims/tapper_anims.fbx"
+						import_scale = 1.0
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""

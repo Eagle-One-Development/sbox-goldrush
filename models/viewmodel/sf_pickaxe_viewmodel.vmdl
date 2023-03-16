@@ -327,6 +327,18 @@
 				]
 				disabled = true
 			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "SkeletonFile"
+						name = "sf_pickaxe_temp_anims"
+						filename = "models/viewmodel/viewmodel_anims/sf_pickaxe_temp_anims.fbx"
+						import_scale = 1.0
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""

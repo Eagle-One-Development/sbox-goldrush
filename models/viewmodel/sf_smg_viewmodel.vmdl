@@ -384,6 +384,18 @@
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "SkeletonFile"
+						name = "SF_SMG"
+						filename = "models/viewmodel/smg/SF_SMG.fbx"
+						import_scale = 1.0
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""

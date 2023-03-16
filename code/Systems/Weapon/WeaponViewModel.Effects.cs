@@ -144,6 +144,12 @@ public partial class WeaponViewModel
 		rotationOffsetTarget = Rotation.Identity;
 
 		{
+			//
+			// Apply camera effects here so that they aren't affected
+			// by sprinting rotation offset etc.
+			//
+			AddCameraEffects();
+
 			// Global
 			rotationOffsetTarget *= Rotation.From( Data.GlobalAngleOffset );
 			positionOffsetTarget += forward * (velocity.x * Data.VelocityScale + Data.GlobalPositionOffset.x);
@@ -178,6 +184,26 @@ public partial class WeaponViewModel
 		Position += realPositionOffset;
 
 		Camera.Main.SetViewModelCamera( EvaluateFieldOfView(), 1, 2048 );
+	}
+
+	private void AddCameraEffects()
+	{
+		if ( GetBoneIndex( "camera" ) < 0 )
+			return;
+
+		Angles baseAngles = new Angles( 90, 90, 0 );
+
+		var animAngles = GetBoneTransform( "camera" ).Rotation.Angles();
+
+		// Swap P and R
+		animAngles = animAngles.WithPitch( animAngles.roll ).WithRoll( animAngles.pitch );
+		// Subtract base
+		animAngles -= baseAngles;
+
+		var modelAngles = Rotation.Angles();
+		var delta = modelAngles - animAngles;
+
+		Camera.Main.Rotation *= delta.ToRotation();
 	}
 
 	private float EvaluateFieldOfView()
