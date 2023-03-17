@@ -48,6 +48,22 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "Recoil": {
+            "Type": "Vector2",
+            "Value": "\u00220,150\u0022"
+          },
+          "RecoilRecoveryScaleFactor": {
+            "Type": "Single",
+            "Value": "100"
+          },
+          "RecoilScale": {
+            "Type": "Single",
+            "Value": "16"
+          },
+          "RecoilTightnessFactor": {
+            "Type": "Single",
+            "Value": "1"
           }
         }
       },

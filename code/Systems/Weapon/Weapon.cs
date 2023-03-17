@@ -15,6 +15,8 @@ public partial class Weapon : AnimatedEntity
 	public bool IsAiming => Components.Get<Aim>()?.IsActive ?? false;
 	public bool IsReloading => Components.Get<AmmoComponent>()?.IsReloading ?? false;
 
+	public Vector2 Recoil { get; set; }
+
 	public override void Spawn()
 	{
 		EnableHideInFirstPerson = true;

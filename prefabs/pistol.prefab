@@ -48,6 +48,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "Recoil": {
+            "Type": "Vector2",
+            "Value": "\u00220,50\u0022"
           }
         }
       },

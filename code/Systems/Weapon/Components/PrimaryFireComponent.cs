@@ -3,14 +3,18 @@ namespace GoldRush.Weapons;
 [Prefab]
 public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 {
-	[Net, Prefab] public float BaseDamage { get; set; }
-	[Net, Prefab] public float BulletRange { get; set; }
-	[Net, Prefab] public int BulletCount { get; set; }
-	[Net, Prefab] public float BulletForce { get; set; }
-	[Net, Prefab] public float BulletSize { get; set; }
-	[Net, Prefab] public float BulletSpread { get; set; }
-	[Net, Prefab] public float FireDelay { get; set; }
-	[Net, Prefab, ResourceType( "sound" )] public string FireSound { get; set; }
+	[Net, Prefab, Category( "Damage" )] public float BaseDamage { get; set; }
+	[Net, Prefab, Category( "Bullet" )] public float BulletRange { get; set; }
+	[Net, Prefab, Category( "Bullet" )] public float BulletForce { get; set; }
+	[Net, Prefab, Category( "Bullet" )] public float BulletSize { get; set; }
+	[Net, Prefab, Category( "Bullet" )] public float BulletSpread { get; set; }
+	[Net, Prefab, Category( "Bullet" )] public int BulletCount { get; set; }
+	[Net, Prefab, Category( "Fire" )] public float FireDelay { get; set; }
+	[Net, Prefab, ResourceType( "sound" ), Category( "Fire" )] public string FireSound { get; set; }
+
+	[Net, Prefab, Category( "Recoil" )] public Vector2 Recoil { get; set; } = new Vector2( 0, 10 );
+	[Net, Prefab, Category( "Recoil" )] public float RecoilTightnessFactor { get; set; } = 5.0f;
+	[Net, Prefab, Category( "Recoil" )] public float RecoilRecoveryScaleFactor { get; set; } = 20.0f;
 
 	TimeUntil TimeUntilCanFire { get; set; }
 
@@ -45,6 +49,8 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		player?.SetAnimParameter( "b_attack", true );
 
 		var wasHit = ShootBullet( BulletSpread, BulletForce, BulletSize, BulletCount, BulletRange );
+
+		Entity.Recoil += Recoil;
 
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
