@@ -64,9 +64,11 @@ public partial class Player
 		MoveInput = Input.AnalogMove;
 		var lookInput = (LookInput + Input.AnalogLook).Normal;
 
+		// This looks bad, but using a fixed deltatime for this makes things feel a lot smoother, even at lower framerates.
+		float deltaTime = 1 / 120f;
 		// Apply effects from weapons
-		ApplyRecoil( ref lookInput );
-		ApplyViewKick( ref lookInput );
+		ApplyRecoil( ref lookInput, deltaTime );
+		ApplyViewKick( ref lookInput, deltaTime );
 
 		// Since we're a FPS game, let's clamp the player's pitch.
 		LookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -89f, 89f ) );
@@ -74,7 +76,7 @@ public partial class Player
 
 	private Vector2 _recoil;
 
-	private void ApplyRecoil( ref Angles lookAngles )
+	private void ApplyRecoil( ref Angles lookAngles, float deltaTime )
 	{
 		var weapon = ActiveWeapon;
 		var primaryFire = ActiveWeapon.GetComponent<PrimaryFire>();
@@ -83,13 +85,13 @@ public partial class Player
 		var prevPitch = lookAngles.pitch;
 		var prevYaw = lookAngles.yaw;
 
-		_recoil -= recoil * Time.Delta;
+		_recoil -= recoil * deltaTime;
 
 		//
 		// Apply recoil
 		//
-		lookAngles.pitch -= recoil.y * Time.Delta;
-		lookAngles.yaw -= recoil.x * Time.Delta;
+		lookAngles.pitch -= recoil.y * deltaTime;
+		lookAngles.yaw -= recoil.x * deltaTime;
 
 		ActiveWeapon.Recoil -= weapon.Recoil
 			.WithY( (prevPitch - lookAngles.pitch) * primaryFire.RecoilTightnessFactor * 1f )
@@ -99,21 +101,21 @@ public partial class Player
 		// Recovery
 		//
 		var delta = _recoil;
-		_recoil = Vector2.Lerp( _recoil, 0, primaryFire.RecoilRecoveryScaleFactor * Time.Delta );
+		_recoil = Vector2.Lerp( _recoil, 0, primaryFire.RecoilRecoveryScaleFactor * deltaTime );
 		delta -= _recoil;
 
 		lookAngles.pitch -= delta.y;
 		lookAngles.yaw -= delta.x;
 
 		_rollMul += weapon.Recoil.Length / 10f;
-		_rollMul = _rollMul.LerpTo( 0.0f, 5f * Time.Delta );
+		_rollMul = _rollMul.LerpTo( 0.0f, 5f * deltaTime );
 		_rollMul = _rollMul.Clamp( 0, 1 );
 	}
 
 	private float _roll;
 	private float _rollMul = 0.0f;
 
-	private void ApplyViewKick( ref Angles lookAngles )
+	private void ApplyViewKick( ref Angles lookAngles, float deltaTime )
 	{
 		var weapon = ActiveWeapon;
 		var primaryFire = ActiveWeapon.GetComponent<PrimaryFire>();
@@ -125,13 +127,13 @@ public partial class Player
 		targetRoll = (-1.0f).LerpTo( 1.0f, targetRoll );
 		targetRoll *= primaryFire.ViewKickbackStrength * Easing.BounceInOut( weapon.ViewKick );
 
-		_roll = _roll.LerpTo( targetRoll, 30f * Time.Delta );
+		_roll = _roll.LerpTo( targetRoll, 30f * deltaTime );
 		lookAngles = new Angles(
 			lookAngles.pitch,
 			lookAngles.yaw.NormalizeDegrees(),
 			_roll
 		); ;
 
-		weapon.ViewKick = weapon.ViewKick.LerpTo( 0, primaryFire.ViewKickbackRecoveryScaleFactor * Time.Delta );
+		weapon.ViewKick = weapon.ViewKick.LerpTo( 0, primaryFire.ViewKickbackRecoveryScaleFactor * deltaTime );
 	}
 }
