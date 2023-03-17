@@ -115,23 +115,23 @@
           },
           "Recoil": {
             "Type": "Vector2",
-            "Value": "\u00220,0\u0022"
+            "Value": "\u00220,100\u0022"
           },
           "RecoilRecoveryScaleFactor": {
             "Type": "Single",
-            "Value": "1"
+            "Value": "5"
           },
           "RecoilTightnessFactor": {
             "Type": "Single",
-            "Value": "1"
+            "Value": "10"
           },
           "ViewKickbackRecoveryScaleFactor": {
             "Type": "Single",
-            "Value": "0"
+            "Value": "5"
           },
           "ViewKickbackStrength": {
             "Type": "Single",
-            "Value": "0"
+            "Value": "5"
           }
         }
       }
