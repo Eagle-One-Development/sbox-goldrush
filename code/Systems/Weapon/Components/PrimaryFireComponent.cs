@@ -44,21 +44,24 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 		player?.SetAnimParameter( "b_attack", true );
 
+		var wasHit = ShootBullet( BulletSpread, BulletForce, BulletSize, BulletCount, BulletRange );
+
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
 		{
 			player.PlaySound( FireSound );
-			DoShootEffects( To.Single( player ) );
+			DoShootEffects( To.Single( player ), wasHit );
 		}
-
-		ShootBullet( BulletSpread, BulletForce, BulletSize, BulletCount, BulletRange );
 	}
 
 	[ClientRpc]
-	public static void DoShootEffects()
+	public static void DoShootEffects( bool wasHit )
 	{
 		Game.AssertClient();
 		WeaponViewModel.Current?.SetAnimParameter( "b_attack", true );
+
+		// Melee weapons contain a "b_hit" parameter that is set to true when the weapon hits something.
+		WeaponViewModel.Current?.SetAnimParameter( "b_hit", wasHit );
 	}
 
 	public IEnumerable<TraceResult> TraceBullet( Vector3 start, Vector3 end, float radius )
@@ -76,8 +79,11 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		}
 	}
 
-	public void ShootBullet( float spread, float force, float bulletSize, int bulletCount = 1, float bulletRange = 5000f )
+	/// <returns>Whether this bullet hit anything or not</returns>
+	public bool ShootBullet( float spread, float force, float bulletSize, int bulletCount = 1, float bulletRange = 5000f )
 	{
+		bool wasHit = false;
+
 		//
 		// Seed rand using the tick, so bullet cones match on client and server
 		//
@@ -100,6 +106,8 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 				if ( !Game.IsServer ) continue;
 				if ( !tr.Entity.IsValid() ) continue;
 
+				if ( tr.Hit ) wasHit = true;
+
 				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage )
 					.UsingTraceResult( tr )
 					.WithAttacker( Player )
@@ -108,5 +116,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 				tr.Entity.TakeDamage( damageInfo );
 			}
 		}
+
+		return wasHit;
 	}
 }
