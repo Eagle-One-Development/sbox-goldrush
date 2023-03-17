@@ -64,6 +64,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "IsMelee": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },
@@ -97,7 +101,7 @@
           },
           "FireDelay": {
             "Type": "Single",
-            "Value": "0.5"
+            "Value": "1"
           },
           "_name": {
             "Value": "\u0022PrimaryFire\u0022"

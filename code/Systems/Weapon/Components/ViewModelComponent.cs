@@ -8,23 +8,27 @@ public partial class ViewModelComponent : WeaponComponent, ISingletonComponent
 	// so we can populate all the Prefab marked properties with their defaults.
 
 	//// General
-	[Net, Prefab, ResourceType( "vmdl" )] public string ViewModelPath { get; set; }
+	[Net, Prefab, ResourceType( "vmdl" ), Category( "General" )] public string ViewModelPath { get; set; }
 
-	[Net, Prefab] public float OverallWeight { get; set; }
-	[Net, Prefab] public float WeightReturnForce { get; set; }
-	[Net, Prefab] public float WeightDamping { get; set; }
-	[Net, Prefab] public float AccelerationDamping { get; set; }
-	[Net, Prefab] public float VelocityScale { get; set; }
+	[Net, Prefab, Category( "General" )] public float OverallWeight { get; set; }
+	[Net, Prefab, Category( "General" )] public float WeightReturnForce { get; set; }
+	[Net, Prefab, Category( "General" )] public float WeightDamping { get; set; }
+	[Net, Prefab, Category( "General" )] public float AccelerationDamping { get; set; }
+	[Net, Prefab, Category( "General" )] public float VelocityScale { get; set; }
 
 	//// Walking & Bob
-	[Net, Prefab] public Vector3 WalkCycleOffset { get; set; }
-	[Net, Prefab] public Vector2 BobAmount { get; set; }
+	[Net, Prefab, Category( "Walking & Bob" )] public Vector3 WalkCycleOffset { get; set; }
+	[Net, Prefab, Category( "Walking & Bob" )] public Vector2 BobAmount { get; set; }
 
 	//// Global
-	[Net, Prefab] public Vector3 GlobalPositionOffset { get; set; }
-	[Net, Prefab] public Angles GlobalAngleOffset { get; set; }
+	[Net, Prefab, Category( "Global" )] public Vector3 GlobalPositionOffset { get; set; }
+	[Net, Prefab, Category( "Global" )] public Angles GlobalAngleOffset { get; set; }
 
 	//// Crouching
-	[Net, Prefab] public Vector3 CrouchPositionOffset { get; set; }
-	[Net, Prefab] public Angles CrouchAngleOffset { get; set; }
+	[Net, Prefab, Category( "Crouching" )] public Vector3 CrouchPositionOffset { get; set; }
+	[Net, Prefab, Category( "Crouching" )] public Angles CrouchAngleOffset { get; set; }
+
+	//// Sprinting
+	[Net, Prefab, Category( "Sprinting" )] public Vector3 SprintPositionOffset { get; set; }
+	[Net, Prefab, Category( "Sprinting" )] public Angles SprintAngleOffset { get; set; }
 }

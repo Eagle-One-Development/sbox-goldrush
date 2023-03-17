@@ -137,7 +137,7 @@
           },
           "SprintAngleOffset": {
             "Type": "Angles",
-            "Value": "\u00220,0,0\u0022"
+            "Value": "\u002210,10,-10\u0022"
           },
           "ViewModelPath": {
             "Type": "String",

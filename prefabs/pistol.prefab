@@ -121,7 +121,7 @@
           },
           "SprintPositionOffset": {
             "Type": "Vector3",
-            "Value": "\u00220,0,0\u0022"
+            "Value": "\u002210,-6,-60\u0022"
           },
           "AimAngleOffset": {
             "Type": "Angles",
@@ -137,7 +137,7 @@
           },
           "SprintAngleOffset": {
             "Type": "Angles",
-            "Value": "\u00220,0,0\u0022"
+            "Value": "\u0022-65,0,5\u0022"
           },
           "ViewModelPath": {
             "Type": "String",
@@ -210,7 +210,9 @@
           "_name": {
             "Value": "\u0022Aim\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],

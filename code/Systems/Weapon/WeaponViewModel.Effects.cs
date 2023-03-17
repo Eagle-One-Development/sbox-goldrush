@@ -174,7 +174,8 @@ public partial class WeaponViewModel
 			);
 
 			// Sprinting Camera Rotation
-			Rotation *= Rotation.Lerp( Rotation.Identity, Rotation.From( 10, 10, -10 ), sprintLerp );
+			rotationOffsetTarget *= Rotation.From( Data.SprintAngleOffset * sprintLerp );
+			ApplyPositionOffset( Data.SprintPositionOffset, sprintLerp );
 		}
 
 		realRotationOffset = rotationOffsetTarget;
