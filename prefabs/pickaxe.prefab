@@ -112,6 +112,26 @@
           "FireSound": {
             "Type": "String",
             "Value": "\u0022sounds/pickaxe/weapon_pickaxe.miss.sound\u0022"
+          },
+          "Recoil": {
+            "Type": "Vector2",
+            "Value": "\u00220,0\u0022"
+          },
+          "RecoilRecoveryScaleFactor": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "RecoilTightnessFactor": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "ViewKickbackRecoveryScaleFactor": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "ViewKickbackStrength": {
+            "Type": "Single",
+            "Value": "0"
           }
         }
       }
