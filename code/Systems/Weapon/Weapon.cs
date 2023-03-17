@@ -16,6 +16,7 @@ public partial class Weapon : AnimatedEntity
 	public bool IsReloading => Components.Get<AmmoComponent>()?.IsReloading ?? false;
 
 	public Vector2 Recoil { get; set; }
+	public float ViewKick { get; set; }
 
 	public override void Spawn()
 	{

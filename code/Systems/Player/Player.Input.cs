@@ -1,4 +1,5 @@
 using GoldRush.Weapons;
+using Sandbox.Utility;
 
 namespace GoldRush;
 
@@ -63,8 +64,9 @@ public partial class Player
 		MoveInput = Input.AnalogMove;
 		var lookInput = (LookInput + Input.AnalogLook).Normal;
 
-		// Apply recoil for weapons
+		// Apply effects from weapons
 		ApplyRecoil( ref lookInput );
+		ApplyViewKick( ref lookInput );
 
 		// Since we're a FPS game, let's clamp the player's pitch.
 		LookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -89f, 89f ) );
@@ -102,5 +104,34 @@ public partial class Player
 
 		lookAngles.pitch -= delta.y;
 		lookAngles.yaw -= delta.x;
+
+		_rollMul += weapon.Recoil.Length / 10f;
+		_rollMul = _rollMul.LerpTo( 0.0f, 5f * Time.Delta );
+		_rollMul = _rollMul.Clamp( 0, 1 );
+	}
+
+	private float _roll;
+	private float _rollMul = 0.0f;
+
+	private void ApplyViewKick( ref Angles lookAngles )
+	{
+		var weapon = ActiveWeapon;
+		var primaryFire = ActiveWeapon.GetComponent<PrimaryFire>();
+		var recoil = weapon.Recoil;
+
+		var rollCoords = recoil + (Time.Now * 100);
+		var targetRoll = Noise.Perlin( rollCoords.x, rollCoords.y );
+
+		targetRoll = (-1.0f).LerpTo( 1.0f, targetRoll );
+		targetRoll *= primaryFire.ViewKickbackStrength * Easing.BounceInOut( weapon.ViewKick );
+
+		_roll = _roll.LerpTo( targetRoll, 30f * Time.Delta );
+		lookAngles = new Angles(
+			lookAngles.pitch,
+			lookAngles.yaw.NormalizeDegrees(),
+			_roll
+		); ;
+
+		weapon.ViewKick = weapon.ViewKick.LerpTo( 0, primaryFire.ViewKickbackRecoveryScaleFactor * Time.Delta );
 	}
 }

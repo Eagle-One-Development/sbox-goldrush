@@ -16,6 +16,9 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 	[Net, Prefab, Category( "Recoil" )] public float RecoilTightnessFactor { get; set; } = 5.0f;
 	[Net, Prefab, Category( "Recoil" )] public float RecoilRecoveryScaleFactor { get; set; } = 20.0f;
 
+	[Net, Prefab, Category( "View Kick" )] public float ViewKickbackStrength { get; set; } = 10.0f;
+	[Net, Prefab, Category( "View Kick" )] public float ViewKickbackRecoveryScaleFactor { get; set; } = 10.0f;
+
 	TimeUntil TimeUntilCanFire { get; set; }
 
 	protected override bool CanStart( Player player )
@@ -51,6 +54,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		var wasHit = ShootBullet( BulletSpread, BulletForce, BulletSize, BulletCount, BulletRange );
 
 		Entity.Recoil += Recoil;
+		Entity.ViewKick = 1.0f;
 
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
