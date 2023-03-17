@@ -120,7 +120,7 @@ public partial class WeaponComponent : GameComponent<Weapon>
 	/// Called when a game event is sent to the player.
 	/// </summary>
 	/// <param name="eventName"></param>
-	public virtual void OnGameEvent( string eventName )
+	public override void OnGameEvent( string eventName )
 	{
 		//
 	}

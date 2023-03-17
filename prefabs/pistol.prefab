@@ -68,6 +68,10 @@
           "ViewKickbackRecoveryScaleFactor": {
             "Type": "Single",
             "Value": "7.5"
+          },
+          "SprintToFireDelay": {
+            "Type": "Single",
+            "Value": "0.2"
           }
         }
       },

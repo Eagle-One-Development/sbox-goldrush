@@ -10,6 +10,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 	[Net, Prefab, Category( "Bullet" )] public float BulletSpread { get; set; }
 	[Net, Prefab, Category( "Bullet" )] public int BulletCount { get; set; }
 	[Net, Prefab, Category( "Fire" )] public float FireDelay { get; set; }
+	[Net, Prefab, Category( "Fire" )] public float SprintToFireDelay { get; set; } = 0.2f;
 	[Net, Prefab, ResourceType( "sound" ), Category( "Fire" )] public string FireSound { get; set; }
 
 	[Net, Prefab, Category( "Recoil" )] public Vector2 Recoil { get; set; } = new Vector2( 0, 10 );
@@ -36,9 +37,9 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 	public override void OnGameEvent( string eventName )
 	{
-		if ( eventName == "sprint.stop" )
+		if ( eventName == "sprint mechanic.stop" )
 		{
-			TimeUntilCanFire = 0.2f;
+			TimeUntilCanFire = SprintToFireDelay;
 		}
 	}
 

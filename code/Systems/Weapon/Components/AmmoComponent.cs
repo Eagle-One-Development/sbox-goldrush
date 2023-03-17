@@ -7,6 +7,7 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 	[Net, Prefab] public int ClipSize { get; set; } = 10;
 	[Net, Prefab] public AmmoType Type { get; set; } = AmmoType.Generic;
 	[Net, Prefab] public float ReloadTime { get; set; } = 1f;
+	[Net, Prefab] public float SprintToReloadDelay { get; set; } = 0.2f;
 	[Net, Prefab, ResourceType( "sound" )] public string ReloadSound { get; set; } = "weapons/rust_smg/sounds/rust_smg.reloadstart.sound";
 
 	// active values
@@ -39,9 +40,9 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 
 	public override void OnGameEvent( string eventName )
 	{
-		if ( eventName == "sprint.stop" )
+		if ( eventName == "sprint mechanic.stop" )
 		{
-			TimeUntilCanReload = 0.2f;
+			TimeUntilCanReload = SprintToReloadDelay;
 		}
 	}
 
