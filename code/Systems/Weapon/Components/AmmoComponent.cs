@@ -103,9 +103,7 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		var ammo = Player.Ammo.TryTakeAmmo( Type, ClipSize - Ammo );
 		Ammo += ammo;
 
-		IsReloading = false;
-
-		RunGameEvent( "ammo component.finished" );
+		OnReloadFinished();
 	}
 
 	private void ForceEndReload( Player player )
@@ -114,9 +112,13 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		// Even though we disable player sprinting, we should bail in case that
 		// check fails somewhere and the player does manage to sprint.
 		//
-		IsReloading = false;
 		StopReloadEffects( To.Single( player ) );
+		OnReloadFinished();
+	}
 
+	private void OnReloadFinished()
+	{
+		IsReloading = false;
 		RunGameEvent( "ammo component.finished" );
 	}
 
