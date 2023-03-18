@@ -201,6 +201,11 @@ public partial class Player : AnimatedEntity
 		if ( !Team.ShouldTakeDamage( info ) )
 			return;
 
+		{
+			if ( info.Attacker is Player attackingPlayer )
+				attackingPlayer.RunGameEvent( "player.diddamage" );
+		}
+
 		// Check for headshot damage
 		var isHeadshot = info.Hitbox.HasTag( "head" );
 		if ( isHeadshot )
@@ -233,8 +238,10 @@ public partial class Player : AnimatedEntity
 				{
 					RunGameEvent( "player.waskilled" );
 
-					if ( info.Attacker is Player attackingPlayer )
-						attackingPlayer.RunGameEvent( "player.gotkill", Client.Name );
+					{
+						if ( info.Attacker is Player attackingPlayer )
+							attackingPlayer.RunGameEvent( "player.gotkill", Client.Name );
+					}
 				}
 			}
 		}

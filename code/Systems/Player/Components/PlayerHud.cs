@@ -13,4 +13,10 @@ public partial class PlayerHud : GameComponent<Player>, ISingletonComponent
 	{
 		EventFeed.AddEvent( To.Single( Entity ), $"Eliminated {playerName}", 0 );
 	}
+
+	[OnGameEvent( "player.diddamage" )]
+	public void OnPlayerDidDamage()
+	{
+		Hitmarker.AddHitmarker( To.Single( Entity ) );
+	}
 }
