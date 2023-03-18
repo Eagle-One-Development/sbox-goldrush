@@ -3,6 +3,14 @@
 [Prefab]
 public partial class Aim : WeaponComponent, ISingletonComponent
 {
+	TimeUntil _timeUntilCanAim;
+
+	public override void OnGameEvent( string eventName )
+	{
+		if ( eventName == "ammo component.finished" )
+			_timeUntilCanAim = 1.0f;
+	}
+
 	protected override bool CanStart( Player player )
 	{
 		if ( !Input.Down( InputButton.SecondaryAttack ) ) return false;
@@ -10,6 +18,10 @@ public partial class Aim : WeaponComponent, ISingletonComponent
 
 		// We don't want the player to aim in while reloading
 		if ( Weapon.IsReloading ) return false;
+
+		// Don't want the player to aim in immediately after reloading either,
+		// as this causes issues with the animgraph
+		if ( _timeUntilCanAim > 0 ) return false;
 
 		return true;
 	}
@@ -36,6 +48,14 @@ public partial class Aim : WeaponComponent, ISingletonComponent
 		{
 			ToggleAimEffects( To.Single( player ) );
 		}
+	}
+
+	public override void Simulate( IClient cl, Player player )
+	{
+		base.Simulate( cl, player );
+
+		if ( Weapon.IsReloading )
+			IsActive = false;
 	}
 
 	[ClientRpc]

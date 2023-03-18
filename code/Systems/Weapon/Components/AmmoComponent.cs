@@ -116,6 +116,8 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		Ammo += ammo;
 
 		IsReloading = false;
+
+		RunGameEvent( "ammo component.finished" );
 	}
 
 	private void ForceEndReload( Player player )
@@ -126,6 +128,8 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 		//
 		IsReloading = false;
 		StopReloadEffects( To.Single( player ) );
+
+		RunGameEvent( "ammo component.finished" );
 	}
 
 	public void DropAmmo( Player player, int amount )
