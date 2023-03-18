@@ -21,12 +21,12 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 	[Net, Prefab, Category( "View Kick" )] public float ViewKickbackRecoveryScaleFactor { get; set; } = 10.0f;
 	[Net, Prefab, Category( "View Kick" )] public float ViewKickbackTightnessFactor { get; set; } = 30.0f;
 
-	TimeUntil TimeUntilCanFire { get; set; }
+	TimeUntil _timeUntilCanFire;
 
 	protected override bool CanStart( Player player )
 	{
 		if ( !Input.Down( InputButton.PrimaryAttack ) ) return false;
-		if ( TimeUntilCanFire > 0 ) return false;
+		if ( _timeUntilCanFire > 0 ) return false;
 		if ( !Weapon.CanFire( player ) ) return false;
 
 		// check for ammo
@@ -40,7 +40,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 	{
 		if ( eventName == "sprint mechanic.stop" )
 		{
-			TimeUntilCanFire = SprintToFireDelay;
+			_timeUntilCanFire = SprintToFireDelay;
 		}
 	}
 
