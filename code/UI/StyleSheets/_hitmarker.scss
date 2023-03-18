@@ -1,0 +1,20 @@
+﻿Hitmarker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    sound-in: hitmarker.hit;
+
+    .image {
+        width: 48px;
+        height: 48px;
+        aspect-ratio: 1;
+        flex-grow: 0;
+        background-image: url( ui/hitmarker.png );
+        background-size: cover;
+        mix-blend-mode: lighten;
+    }
+}

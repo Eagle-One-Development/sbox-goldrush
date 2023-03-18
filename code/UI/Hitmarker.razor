@@ -4,30 +4,6 @@
 @namespace GoldRush
 @inherits Panel
 
-<style>
-	Hitmarker {
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		align-items: center;
-		justify-content: center;
-		sound-in: hitmarker.hit;
-		
-	.image
-	{
-		width: 48px;
-		height: 48px;
-		aspect-ratio: 1;
-		flex-grow: 0;
-		background-image: url( ui/hitmarker.png );
-		background-size: cover;
-		mix-blend-mode: lighten;
-	}
-
-	}</style>
-
 <root>
 	<div class="image" style="transform: rotate( @Rotation ) scale( @Scale ); opacity: @Opacity;"></div>
 </root>
@@ -48,25 +24,33 @@
 	{
 		_timeUntilDestroyed = LifeTime;
 
+		// We want the hitmarker's rotation to be based on an exaggerated form of the current view kick
 		_angle = (Player?.ActiveWeapon?.ViewKick.pitch * 10f) ?? 0f;
+
+		// We want the scale to differ slightly between hitmarker instances
 		_scale = Game.Random.Float(0.5f, 1.0f);
 	}
 
-	public float GetFraction( float multiplier = 1.0f )
+	/// <summary>
+	/// Returns a normalized, uniform representation of the hitmarker's lifetime, clamped between 0 and 1
+	/// </summary>
+	public float GetFraction(float multiplier = 1.0f)
 	{
-		return (( _timeUntilDestroyed / LifeTime ) * multiplier).Clamp( 0, 1 );
+		return ((_timeUntilDestroyed / LifeTime) * multiplier).Clamp(0, 1);
 	}
 
 	public override void Tick()
 	{
-		float t = GetFraction();
-
+		//
+		// Should this be deleted?
+		//
 		if (_timeUntilDestroyed <= 0)
 			Delete(true);
 
+		// Apply effects
 		Rotation = Easing.BounceIn(GetFraction()) * _angle;
-		Scale = 1.0f + (Easing.EaseOut(GetFraction( 2.0f )) * _scale);
-		Opacity = Easing.EaseOut(GetFraction( 4.0f ));
+		Scale = 1.0f + (Easing.EaseOut(GetFraction(2.0f)) * _scale);
+		Opacity = Easing.EaseOut(GetFraction(4.0f));
 	}
 
 	protected override int BuildHash()
