@@ -5,7 +5,7 @@
 @inherits Panel
 
 <root>
-	<div class="image" style="transform: rotate( @Rotation ) scale( @Scale ); opacity: @Opacity;"></div>
+	<div class="image" @ref="Image" style="transform: translate( -50% -50% ) rotate( @Rotation ) scale( @Scale ); opacity: @Opacity;"></div>
 </root>
 
 @code {
@@ -13,22 +13,28 @@
 	public float Rotation { get; set; }
 	public new float Opacity { get; set; }
 
+	public Panel Image { get; set; }
+
 	private TimeUntil _timeUntilDestroyed;
 	private float _angle;
 	private float _scale;
 
-	private const float LifeTime = 0.2f;
+	private const float LifeTime = 0.15f;
 	public Player Player => Game.LocalPawn as Player;
 
 	public Hitmarker(bool isKill = false)
 	{
 		_timeUntilDestroyed = LifeTime;
 
+		// Add some variation to each hitmarker
+		float angleMul = Game.Random.Float(5f, 10f);
+		float scaleMul = Game.Random.Float(0.1f, 0.9f);
+
 		// We want the hitmarker's rotation to be based on an exaggerated form of the current view kick
-		_angle = (Player?.ActiveWeapon?.ViewKick.pitch * 10f) ?? 0f;
+		_angle = (Player?.ActiveWeapon?.ViewKick.pitch * angleMul) ?? 0f;
 
 		// We want the scale to differ slightly between hitmarker instances
-		_scale = Game.Random.Float(0.5f, 1.0f);
+		_scale = scaleMul;
 
 		// Eliminations / kills have a slightly different effect
 		SetClass("is-kill", isKill);
@@ -37,10 +43,12 @@
 	/// <summary>
 	/// Returns a normalized, uniform representation of the hitmarker's lifetime, clamped between 0 and 1
 	/// </summary>
-	public float GetFraction(float multiplier = 1.0f)
-	{
-		return ((_timeUntilDestroyed / LifeTime) * multiplier).Clamp(0, 1);
-	}
+	public float GetFraction(float speed = 1.0f) => ((_timeUntilDestroyed / LifeTime) / speed).Clamp(0, 1);
+
+	/// <summary>
+	/// Returns sine, normalized to [0..1] range
+	/// </summary>
+	public static float Sin01(float t) => (float)Math.Sin(t * Math.PI * 2) * 0.5f + 0.5f;
 
 	public override void Tick()
 	{
@@ -50,10 +58,29 @@
 		if (_timeUntilDestroyed <= 0)
 			Delete(true);
 
+		//
 		// Apply effects
-		Rotation = Easing.BounceIn(GetFraction()) * _angle;
-		Scale = 1.0f + (Easing.EaseOut(GetFraction(2.0f)) * _scale);
-		Opacity = Easing.EaseOut(GetFraction(4.0f));
+		//
+		// Rotation
+		{
+			float t = GetFraction(2.0f);
+			Rotation = Easing.EaseOut(t) * _angle;
+		}
+		// Scale
+		{
+			float t = GetFraction();
+			float baseScale = 1.0f;
+			Scale = baseScale + (Easing.EaseOut(t) * _scale);
+		}
+		// Opacity
+		{
+			float t = GetFraction();
+			t += (MathF.PI / 2.0f); // Start at 1
+			float opacityInv = MathF.Pow(Sin01(t), 4f); // Power will exaggerate effect transition
+			Opacity = 1.0f - opacityInv;
+		}
+
+		PanelExtension.PositionAtCrosshair(Image);
 	}
 
 	protected override int BuildHash()
