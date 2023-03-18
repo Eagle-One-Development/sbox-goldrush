@@ -10,4 +10,9 @@ public class GlowingComponent : EntityComponent
 		Effect = Particles.Create( "particles/pickup.vpcf" );
 		Effect.SetEntity( 0, Entity );
 	}
+
+	protected override void OnDeactivate()
+	{
+		Effect.Destroy();
+	}
 }
