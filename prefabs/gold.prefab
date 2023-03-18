@@ -70,6 +70,16 @@
             "Value": "[\r\n  \u0022100\u0022\r\n]"
           }
         }
+      },
+      {
+        "Guid": "aebab60f-d234-4204-a6a3-ef563c94ae17",
+        "Class": "GlowingComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022GlowingComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {
