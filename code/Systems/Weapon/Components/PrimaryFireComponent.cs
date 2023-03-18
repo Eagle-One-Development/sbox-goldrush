@@ -19,6 +19,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 	[Net, Prefab, Category( "View Kick" )] public float ViewKickbackStrength { get; set; } = 10.0f;
 	[Net, Prefab, Category( "View Kick" )] public float ViewKickbackRecoveryScaleFactor { get; set; } = 10.0f;
+	[Net, Prefab, Category( "View Kick" )] public float ViewKickbackTightnessFactor { get; set; } = 30.0f;
 
 	TimeUntil TimeUntilCanFire { get; set; }
 
@@ -43,6 +44,19 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		}
 	}
 
+	private void ApplyRecoilAndKick()
+	{
+		Entity.Recoil += Recoil;
+
+		// This could maybe be moved into a helper function?
+		// Basically we want an angle where p/y/r are all 1, but have random signs
+		Entity.ViewKick = new Angles(
+			Game.Random.FromArray( new float[] { -1, 1 } ),
+			Game.Random.FromArray( new float[] { -1, 1 } ),
+			Game.Random.FromArray( new float[] { -1, 1 } )
+		);
+	}
+
 	protected override void OnStart( Player player )
 	{
 		if ( Weapon.Components.TryGet<AmmoComponent>( out var ammo ) && !ammo.TakeAmmo() )
@@ -51,11 +65,9 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		base.OnStart( player );
 
 		player?.SetAnimParameter( "b_attack", true );
+		ApplyRecoilAndKick();
 
 		var wasHit = ShootBullet( BulletSpread, BulletForce, BulletSize, BulletCount, BulletRange );
-
-		Entity.Recoil += Recoil;
-		Entity.ViewKick = 1.0f;
 
 		// Send clientside effects to the player.
 		if ( Game.IsServer )

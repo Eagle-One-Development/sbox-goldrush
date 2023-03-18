@@ -1,5 +1,4 @@
 using GoldRush.Weapons;
-using Sandbox.Utility;
 
 namespace GoldRush;
 
@@ -64,11 +63,12 @@ public partial class Player
 		MoveInput = Input.AnalogMove;
 		var lookInput = (LookInput + Input.AnalogLook).Normal;
 
-		// This looks bad, but using a fixed deltatime for this makes things feel a lot smoother, even at lower framerates.
-		float deltaTime = 1 / 120f;
+		//
 		// Apply effects from weapons
+		//
+		// This might look bad - but using a fixed deltatime for this makes things feel a lot smoother, even at lower framerates.
+		float deltaTime = 1f / 120f;
 		ApplyRecoil( ref lookInput, deltaTime );
-		ApplyViewKick( ref lookInput, deltaTime );
 
 		// Since we're a FPS game, let's clamp the player's pitch.
 		LookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -89f, 89f ) );
@@ -79,9 +79,16 @@ public partial class Player
 	private void ApplyRecoil( ref Angles lookAngles, float deltaTime )
 	{
 		var weapon = ActiveWeapon;
-		var primaryFire = ActiveWeapon.GetComponent<PrimaryFire>();
-		var recoil = weapon.Recoil;
 
+		if ( !weapon.IsValid() )
+			return;
+
+		var primaryFire = ActiveWeapon.GetComponent<PrimaryFire>();
+
+		if ( primaryFire == null )
+			return;
+
+		var recoil = weapon.Recoil;
 		var prevPitch = lookAngles.pitch;
 		var prevYaw = lookAngles.yaw;
 
@@ -106,34 +113,5 @@ public partial class Player
 
 		lookAngles.pitch -= delta.y;
 		lookAngles.yaw -= delta.x;
-
-		_rollMul += weapon.Recoil.Length / 10f;
-		_rollMul = _rollMul.LerpTo( 0.0f, 5f * deltaTime );
-		_rollMul = _rollMul.Clamp( 0, 1 );
-	}
-
-	private float _roll;
-	private float _rollMul = 0.0f;
-
-	private void ApplyViewKick( ref Angles lookAngles, float deltaTime )
-	{
-		var weapon = ActiveWeapon;
-		var primaryFire = ActiveWeapon.GetComponent<PrimaryFire>();
-		var recoil = weapon.Recoil;
-
-		var rollCoords = recoil + (Time.Now * 100);
-		var targetRoll = Noise.Perlin( rollCoords.x, rollCoords.y );
-
-		targetRoll = (-1.0f).LerpTo( 1.0f, targetRoll );
-		targetRoll *= primaryFire.ViewKickbackStrength * Easing.BounceInOut( weapon.ViewKick );
-
-		_roll = _roll.LerpTo( targetRoll, 30f * deltaTime );
-		lookAngles = new Angles(
-			lookAngles.pitch,
-			lookAngles.yaw.NormalizeDegrees(),
-			_roll
-		); ;
-
-		weapon.ViewKick = weapon.ViewKick.LerpTo( 0, primaryFire.ViewKickbackRecoveryScaleFactor * deltaTime );
 	}
 }

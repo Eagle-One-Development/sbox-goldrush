@@ -189,22 +189,17 @@ public partial class WeaponViewModel
 
 	private void AddCameraEffects()
 	{
-		if ( GetBoneIndex( "camera" ) < 0 )
+		var cameraBoneIndex = GetBoneIndex( "camera" );
+
+		if ( cameraBoneIndex < 0 )
 			return;
 
-		Angles baseAngles = new Angles( 90, 90, 0 );
+		var inRot = (Rotation.Inverse * GetBoneTransform( cameraBoneIndex ).Rotation);
 
-		var animAngles = GetBoneTransform( "camera" ).Rotation.Angles();
+		var baseRot = Rotation.From( -90, -90, 0 );
+		var rot = baseRot * inRot;
 
-		// Swap P and R
-		animAngles = animAngles.WithPitch( animAngles.roll ).WithRoll( animAngles.pitch );
-		// Subtract base
-		animAngles -= baseAngles;
-
-		var modelAngles = Rotation.Angles();
-		var delta = modelAngles - animAngles;
-
-		Camera.Main.Rotation *= delta.ToRotation();
+		Camera.Main.Rotation *= rot;
 	}
 
 	private float EvaluateFieldOfView()
