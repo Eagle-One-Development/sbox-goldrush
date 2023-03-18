@@ -98,6 +98,7 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 			CurrentEyeHeight = CurrentEyeHeight.LerpTo( target, Time.Delta * 10f );
 		}
 
+		Player.BaseEyeRotation = Player.BaseLookInput.ToRotation();
 		Player.EyeRotation = Player.LookInput.ToRotation();
 		Player.EyeLocalPosition = Vector3.Up * CurrentEyeHeight;
 	}

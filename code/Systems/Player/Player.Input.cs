@@ -15,6 +15,11 @@ public partial class Player
 	[ClientInput] public Angles LookInput { get; protected set; }
 
 	/// <summary>
+	/// Normalized accumulation of Input.AnalogLook, sans any recoil from weapons
+	/// </summary>
+	[ClientInput] public Angles BaseLookInput { get; protected set; }
+
+	/// <summary>
 	/// ?
 	/// </summary>
 	[ClientInput] public Entity ActiveWeaponInput { get; set; }
@@ -52,6 +57,12 @@ public partial class Player
 	public Rotation EyeLocalRotation { get; set; }
 
 	/// <summary>
+	/// Rotation of the player's eyes, sans any recoil effects from weapons.
+	/// </summary>
+	[Net, Predicted, Browsable( false )]
+	public Rotation BaseEyeRotation { get; set; }
+
+	/// <summary>
 	/// Override the aim ray to use the player's eye position and rotation.
 	/// </summary>
 	public override Ray AimRay => new Ray( EyePosition, EyeRotation.Forward );
@@ -62,6 +73,7 @@ public partial class Player
 
 		MoveInput = Input.AnalogMove;
 		var lookInput = (LookInput + Input.AnalogLook).Normal;
+		BaseLookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -89f, 89f ) );
 
 		//
 		// Apply effects from weapons
