@@ -20,7 +20,7 @@
 	private const float LifeTime = 0.2f;
 	public Player Player => Game.LocalPawn as Player;
 
-	public Hitmarker()
+	public Hitmarker(bool isKill = false)
 	{
 		_timeUntilDestroyed = LifeTime;
 
@@ -29,6 +29,9 @@
 
 		// We want the scale to differ slightly between hitmarker instances
 		_scale = Game.Random.Float(0.5f, 1.0f);
+
+		// Eliminations / kills have a slightly different effect
+		SetClass("is-kill", isKill);
 	}
 
 	/// <summary>
@@ -59,8 +62,9 @@
 	}
 
 	[ConCmd.Client("gr_add_hitmarker", CanBeCalledFromServer = true)]
-	public static void AddHitmarker()
+	public static void AddHitmarker(bool isKill)
 	{
-		Game.RootPanel.AddChild<Hitmarker>();
+		var hitmarker = new Hitmarker(isKill);
+		Game.RootPanel.AddChild(hitmarker);
 	}
 }

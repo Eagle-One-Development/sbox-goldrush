@@ -201,11 +201,6 @@ public partial class Player : AnimatedEntity
 		if ( !Team.ShouldTakeDamage( info ) )
 			return;
 
-		{
-			if ( info.Attacker is Player attackingPlayer )
-				attackingPlayer.RunGameEvent( "player.diddamage" );
-		}
-
 		// Check for headshot damage
 		var isHeadshot = info.Hitbox.HasTag( "head" );
 		if ( isHeadshot )
@@ -225,28 +220,29 @@ public partial class Player : AnimatedEntity
 			SetAudioEffect( To.Single( Client ), "flasthbang", info.Damage.LerpInverse( 0, 60 ) );
 		}
 
-		if ( Health > 0 && info.Damage > 0 )
+		this.ProceduralHitReaction( info );
+
+		if ( Health <= 0 || info.Damage <= 0 ) return;
+
+		Health -= info.Damage;
+		bool isKill = Health <= 0;
+
+		if ( isKill )
+			OnKilled();
+
+		if ( info.Attacker is not Player attackingPlayer )
+			return;
+
+		if ( !Game.IsServer )
+			return;
+
+		if ( isKill )
 		{
-			Health -= info.Damage;
-
-			if ( Health <= 0 )
-			{
-				Health = 0;
-				OnKilled();
-
-				if ( Game.IsServer )
-				{
-					RunGameEvent( "player.waskilled" );
-
-					{
-						if ( info.Attacker is Player attackingPlayer )
-							attackingPlayer.RunGameEvent( "player.gotkill", Client.Name );
-					}
-				}
-			}
+			RunGameEvent( "player.waskilled" );
+			attackingPlayer.RunGameEvent( "player.gotkill", Client.Name );
 		}
 
-		this.ProceduralHitReaction( info );
+		attackingPlayer.RunGameEvent( "player.diddamage", isKill );
 	}
 
 	private async void AsyncRespawn()

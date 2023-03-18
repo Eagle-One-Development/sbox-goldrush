@@ -15,8 +15,8 @@ public partial class PlayerHud : GameComponent<Player>, ISingletonComponent
 	}
 
 	[OnGameEvent( "player.diddamage" )]
-	public void OnPlayerDidDamage()
+	public void OnPlayerDidDamage( bool isKill )
 	{
-		Hitmarker.AddHitmarker( To.Single( Entity ) );
+		Hitmarker.AddHitmarker( To.Single( Entity ), isKill );
 	}
 }
