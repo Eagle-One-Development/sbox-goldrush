@@ -2,57 +2,51 @@
 
 @namespace GoldRush
 
-<root class="with-flex column-reverse with-gap with-shadow">
-    <cell class="with-center with-padding-large with-gap">
-        <label class="with-header">@Health</label>
-        <i class="with-header with-icon">monitor_heart</i>
-    </cell>
+<root class="with-flex column with-gap with-shadow">
+	@{
+		if (Inventory == null) return;
+		int i = 0;
+		foreach (var weapon in Inventory.Weapons)
+		{
+			i++;
+			<cell class="with-center with-padding-large with-gap @(weapon == Weapon ? "active" : "")">
+				<label class="with-text name">@weapon.Name</label>
 
-    @{
-        if ( Inventory == null ) return;
-        int i = 0;
-        foreach( var weapon in Inventory.Weapons )
-        {
-            i++;
-            <cell class="with-center with-padding-large with-gap @(weapon == Weapon ? "active" : "")">
-                <label class="with-subheader id">@i</label>
-                <label class="with-text name">@weapon.Name</label>
-                <!--show ammo for active weapon-->
-                @if(weapon==Weapon) 
-                {
-                    <label class="with-description ammo">@FormatAmmo()</label>
-                }
-            </cell>
-        }
-    }
+				<!-- show ammo for active weapon -->
+				@if (weapon == Weapon)
+				{
+					<label class="with-description ammo">@FormatAmmo()</label>
+				}
+			</cell>
+		}
+	}
 </root>
 
-@code 
+@code
 {
-    public string Health => $"{Player.Health:F0}";
-    public Player Player => Game.LocalPawn as Player;
-    public Weapon Weapon => Player?.ActiveWeapon;
-    public Inventory Inventory => Player.Inventory;
+	public Player Player => Game.LocalPawn as Player;
+	public Weapon Weapon => Player?.ActiveWeapon;
+	public Inventory Inventory => Player.Inventory;
 
-    private string FormatAmmo()
-    {
-        if (!Weapon.HasAmmo())
-            return "";
+	private string FormatAmmo()
+	{
+		if (!Weapon.HasAmmo())
+			return "";
 
-        var clip = Weapon.GetAmmo();
+		var clip = Weapon.GetAmmo();
 
-        var ammoType = Weapon.GetAmmoType();
+		var ammoType = Weapon.GetAmmoType();
 
-        var reserve = Player.Ammo.GetAmmo(ammoType);
+		var reserve = Player.Ammo.GetAmmo(ammoType);
 
-        return $"{clip} / {reserve}";
-    }
+		return $"{clip} / {reserve}";
+	}
 
-    protected override int BuildHash()
-    {
-        if (Weapon.HasAmmo())
-            return HashCode.Combine( Player?.Health, Weapon, Weapon.GetAmmo(), Player.Ammo.GetAmmo( Weapon.GetAmmoType() ) );
-            
-        return HashCode.Combine( Player?.Health, Weapon );
-    }
+	protected override int BuildHash()
+	{
+		if (Weapon.HasAmmo())
+			return HashCode.Combine(Weapon, Weapon.GetAmmo(), Player.Ammo.GetAmmo(Weapon.GetAmmoType()));
+
+		return HashCode.Combine(Weapon);
+	}
 }

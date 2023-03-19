@@ -1,0 +1,28 @@
+﻿@using GoldRush.Weapons;
+
+@namespace GoldRush
+
+<root class="with-flex column with-gap">
+    <cell class="with-align-center with-gap">
+        <i class="with-header with-icon">add_box</i>
+        <row class="with-align-end with-gap row">
+            <label class="with-header">@Health</label>
+            <label class="with-subheader"> / 100</label>
+        </row>
+    </cell>
+
+    <healthbar>
+        <fill style="width: @Health%"></fill>
+    </healthbar>
+</root>
+
+@code
+{
+    public string Health => $"{Player.Health:F0}";
+    public Player Player => Game.LocalPawn as Player;
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player?.Health);
+    }
+}

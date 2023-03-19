@@ -1,5 +1,11 @@
 $blue: #3273eb;
 $rounding: 4px;
+$accent: #faa735;
+$neutral: #343434;
+$shadow: 0 3px 0px rgba( $neutral, 1 );
+
+$safe-area-x: 50px;
+$safe-area-y: 50px;
 
 @import "_chat.scss";
 @import "_info.scss";
@@ -7,125 +13,114 @@ $rounding: 4px;
 @import "_players.scss";
 @import "_eventfeed.scss";
 @import "_hitmarker.scss";
+@import "_vitals.scss";
 
 hud {
     font-family: Poppins;
 }
 
-.with-flex
-{
-    &.column
-    {
+.with-flex {
+    &.column {
         flex-direction: column;
     }
 
-    &.column-reverse, .column-reversed
-    {
+    &.column-reverse, .column-reversed {
         flex-direction: column-reverse;
     }
 
-    &.row
-    {
+    &.row {
         flex-direction: row;
     }
 
-    &.wrap
-    {
+    &.wrap {
         flex-wrap: wrap;
     }
 
-    &.row-reverse, row-reversed
-    {
+    &.row-reverse, row-reversed {
         flex-direction: row-reverse;
     }
 
-    cell
-    {
+    cell {
         border-radius: $rounding;
-        background-color: rgba( black, 0.7 );
     }
 
-    i
-    {
+    i {
         font-family: Material Icons Outlined;
     }
 }
 
-.with-justify-end 
-{
+.with-justify-end {
     justify-content: flex-end;
 }
 
-.with-header
-{
-    font-size: 24px;
-    color: white;
-    font-weight: 600;
+.with-align-end {
+    align-items: flex-end;
 }
 
-.with-subheader
-{
+.with-align-center {
+    align-items: center;
+}
+
+.with-header {
+    font-size: 48px;
+    color: white;
+    font-weight: 600;
+    text-shadow: $shadow;
+}
+
+.with-subheader {
     font-size: 18px;
     color: lightgrey;
     font-weight: 500;
+    text-shadow: $shadow;
 }
 
-.with-text
-{
+.with-text {
     font-size: 16px;
     color: white;
     font-weight: 400;
 }
 
-.with-description
-{
+.with-description {
     font-size: 13px;
     color: white;
     font-weight: 400;
 }
 
-.with-shadow
-{
+.with-shadow {
     text-shadow: 0px 0px 2px rgba( black, 0.3 );
 }
 
-.with-icon
-{
+.with-icon {
     justify-content: center;
     align-items: center;
     align-content: center;
 }
 
-.with-avatar
-{
+.with-avatar {
     margin-left: 2px;
     border-radius: 100px;
     width: 32px;
     height: 32px;
 }
 
-.with-gap
-{
+.with-gap {
     gap: 8px;
 }
 
-.with-gap-small
-{
+.with-gap-small {
     gap: 4px;
 }
 
-.with-padding
-{
+.with-padding {
     padding: 4px;
 }
 
-.with-padding-large
-{
+.with-padding-large {
     padding: 8px;
 }
 
-.with-center
-{
+.with-center {
     align-items: center;
     justify-content: center;
 }

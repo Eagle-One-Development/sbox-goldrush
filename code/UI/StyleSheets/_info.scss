@@ -1,29 +1,22 @@
-Info
-{
+Info {
     position: absolute;
-    bottom: 64px;
-    right: 64px;
-    width: 200px;
-    flex-direction: column-reverse;
+    right: $safe-area-x;
+    bottom: $safe-area-y;
+    width: 250px;
 
-    cell
-    {
-        transition: all 0.2s ease;
+    cell {
+        transition: padding 0.2s ease;
+        border-right: 4px solid transparent;
 
-        &.active
-        {
+        &.active {
             padding: 16px;
+            background: linear-gradient( to left, rgba( $neutral, 0.5 ), rgba( $neutral, 0 ));
+            border-right: 4px solid white;
 
-            .name
-            {
+            .name {
                 color: white;
                 font-size: 24px;
             }
-        }
-
-        .id
-        {
-            font-size: 12px;
         }
     }
 }
