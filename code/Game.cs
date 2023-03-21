@@ -23,16 +23,28 @@ public partial class GoldRushGameManager : GameManager
 		Game.TickRate = 40;
 	}
 
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		GameLoop.Init();
+	}
+
 	public override void ClientJoined( IClient client )
 	{
 		base.ClientJoined( client );
 
+		// start game loop when first player connects
+		if ( GameLoop.Current.ActiveState is null )
+			GameLoop.StartLoop();
+
 		// Create a pawn for this client to play with
 		var pawn = new Player();
 		client.Pawn = pawn;
-		pawn.Respawn();
+		//pawn.Respawn(); // gameloop/state respawns players
 
 		Chat.AddChatEntry( To.Everyone, client.Name, "joined the game", client.SteamId, true );
+		GameLoop.OnClientJoined( client );
 	}
 
 	public override void MoveToSpawnpoint( Entity pawn )

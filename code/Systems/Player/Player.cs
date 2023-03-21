@@ -94,12 +94,16 @@ public partial class Player : AnimatedEntity
 		Model = PlayerModel;
 		Predictable = true;
 
+		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 72 ) );
+
 		// Default properties
-		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 		EnableLagCompensation = true;
-		EnableHitboxes = true;
+
+		EnableDrawing = false;
+		EnableHitboxes = false;
+		EnableAllCollisions = false;
 
 		Tags.Add( "player" );
 
@@ -115,12 +119,12 @@ public partial class Player : AnimatedEntity
 	/// </summary>
 	public void Respawn()
 	{
-		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 72 ) );
-
 		Health = 100;
 		LifeState = LifeState.Alive;
-		EnableAllCollisions = true;
+
 		EnableDrawing = true;
+		EnableHitboxes = true;
+		EnableAllCollisions = true;
 
 		// Re-enable all children.
 		Children.OfType<ModelEntity>()
@@ -144,7 +148,19 @@ public partial class Player : AnimatedEntity
 		Components.Create<PlayerAnimator>();
 		Components.Create<PlayerCamera>();
 
+		GiveLoadout();
+
+		SetupClothing();
+
+		GameManager.Current?.MoveToSpawnpoint( this );
+		ResetInterpolation();
+	}
+
+	public void GiveLoadout()
+	{
 		var inventory = Components.Create<Inventory>();
+		inventory.Clear();
+
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pickaxe.prefab" ) );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pistol.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/smg.prefab" ), false );
@@ -154,13 +170,7 @@ public partial class Player : AnimatedEntity
 		Ammo.AddAmmo( AmmoType.Generic, 1000 );
 		Ammo.AddAmmo( AmmoType.Pistol, 100 );
 		Ammo.AddAmmo( AmmoType.Smg, 300 );
-
-		SetupClothing();
-
-		GameManager.Current?.MoveToSpawnpoint( this );
-		ResetInterpolation();
 	}
-
 
 	/// <summary>
 	/// Called every server and client tick.

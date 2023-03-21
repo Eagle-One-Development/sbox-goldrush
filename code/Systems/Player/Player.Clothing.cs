@@ -9,9 +9,8 @@ public partial class Player
 	/// </summary>
 	public void SetupClothing()
 	{
-		Clothing = new();
+		Clothing ??= new();
 
-		Clothing.ClearEntities();
 		Clothing.LoadFromClient( Client );
 		Clothing.DressEntity( this );
 	}

@@ -34,6 +34,11 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		return success;
 	}
 
+	public void Clear()
+	{
+		Weapons.Clear();
+	}
+
 	public void SetActiveWeapon( Weapon weapon )
 	{
 		var currentWeapon = ActiveWeapon;
