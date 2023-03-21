@@ -52,6 +52,8 @@ public partial class NexusEntity : AnimatedEntity
 
 	public override void TakeDamage( DamageInfo info )
 	{
+		Game.AssertServer();
+
 		//If the attacker is a player and has a team component
 		if ( info.Attacker is Player player && player.Team != null )
 		{
@@ -75,10 +77,20 @@ public partial class NexusEntity : AnimatedEntity
 		{
 			Chat.AddChatEntry( To.Everyone, "GAME", $"The {Team.DisplayName} Nexus has been destroyed! This team can no longer respawn.", "0", true );
 
+			Event.Run( "nexus.destroy" );
+
 			OnDeath?.Invoke( this );
 			Health = 0;
 			LifeState = LifeState.Dead;
 		}
+	}
+
+	[Event( "nexus.destroy" )]
+	public void NexusEffect()
+	{
+		Game.AssertServer();
+
+		PlaySound( "sounds/effects/explosion01.sound" );
 	}
 
 	public static void ResetAll()
