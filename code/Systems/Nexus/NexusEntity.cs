@@ -7,7 +7,7 @@ namespace GoldRush.Nexus;
 [HammerEntity]
 [Model( Model = "models/environment/nexus/spawnnexus.vmdl" )]
 [Title( "Nexus" ), Category( "Gameplay" )]
-public partial class Nexus : AnimatedEntity
+public partial class NexusEntity : AnimatedEntity
 {
 	[Property, Net]
 	public TeamGameResource Team { get; set; }
@@ -15,7 +15,7 @@ public partial class Nexus : AnimatedEntity
 	[Property( "The max health of the nexus" )]
 	public int MaxHealth { get; set; }
 
-	public delegate void OnDeathEvent( Nexus nexus );
+	public delegate void OnDeathEvent( NexusEntity nexus );
 	public event OnDeathEvent OnDeath;
 
 

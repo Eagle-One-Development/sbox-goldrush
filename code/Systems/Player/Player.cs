@@ -114,6 +114,16 @@ public partial class Player : AnimatedEntity
 		Components.Create<PlayerHud>();
 	}
 
+	public bool CanRespawn()
+	{
+		if ( !All.OfType<Nexus.NexusEntity>().Where( x => x.Health > 0 && x.Team.Id == Team.Resource.Id ).Any() )
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 	/// <summary>
 	/// Called when a player respawns, think of this as a soft spawn - we're only reinitializing transient data here.
 	/// </summary>
@@ -227,7 +237,7 @@ public partial class Player : AnimatedEntity
 		// Play a deafening effect if we get hit by blast damage.
 		if ( info.HasTag( "blast" ) )
 		{
-			SetAudioEffect( To.Single( Client ), "flasthbang", info.Damage.LerpInverse( 0, 60 ) );
+			SetAudioEffect( To.Single( Client ), "flashbang", info.Damage.LerpInverse( 0, 60 ) );
 		}
 
 		this.ProceduralHitReaction( info );
@@ -258,6 +268,10 @@ public partial class Player : AnimatedEntity
 	private async void AsyncRespawn()
 	{
 		await GameTask.DelaySeconds( 3f );
+
+		if ( !CanRespawn() )
+			return;
+
 		Respawn();
 	}
 
