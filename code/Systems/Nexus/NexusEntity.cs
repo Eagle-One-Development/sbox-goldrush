@@ -23,9 +23,10 @@ public partial class NexusEntity : AnimatedEntity
 	{
 		base.Spawn();
 		Transmit = TransmitType.Always;
+		LifeState = LifeState.Alive;
 		Health = MaxHealth;
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
-		Tags.Add( "solid" );
+		Tags.Add( "solid", "nexus" );
 	}
 
 	[Event.Client.Frame]
@@ -66,11 +67,17 @@ public partial class NexusEntity : AnimatedEntity
 		if ( GameLoop.State != "maingame" )
 			return;
 
+		if ( LifeState != LifeState.Alive )
+			return;
+
 		Health -= info.Damage;
 		if ( Health <= 0 )
 		{
+			Chat.AddChatEntry( To.Everyone, "GAME", $"The {Team.DisplayName} Nexus has been destroyed! This team can no longer respawn.", "0", true );
+
 			OnDeath?.Invoke( this );
 			Health = 0;
+			LifeState = LifeState.Dead;
 		}
 	}
 }
