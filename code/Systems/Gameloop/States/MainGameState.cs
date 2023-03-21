@@ -15,6 +15,11 @@ public class MainGameState : GameState
 		// respawn players at start of new round and give them weapons
 		player.Respawn();
 		player.GiveLoadout();
+	}
+
+	public override void OnStart()
+	{
+		base.OnStart();
 
 		NexusEntity.ResetAll();
 	}
