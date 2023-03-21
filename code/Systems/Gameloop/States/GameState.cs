@@ -9,6 +9,9 @@ public partial class GameState : Entity
 	public bool IsActive { get; set; }
 	public GameLoop GameLoop => GameLoop.Current;
 
+	[Net]
+	public IList<IClient> Clients { get; set; } = new List<IClient>();
+
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -35,7 +38,15 @@ public partial class GameState : Entity
 
 	public virtual void Update() { }
 
-	public virtual void OnClientJoined( IClient client ) { }
+	public virtual void OnClientJoined( IClient client )
+	{
+		Clients.Add( client );
+	}
+
+	public virtual void OnClientDisconnect( IClient client, NetworkDisconnectionReason reason )
+	{
+		Clients.Remove( client );
+	}
 
 	DisplayInfo? displayInfo;
 	public DisplayInfo DisplayInfo

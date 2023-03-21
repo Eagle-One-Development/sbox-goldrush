@@ -27,6 +27,11 @@ public partial class GameLoop : Entity
 		Current?.ActiveState?.OnClientJoined( client );
 	}
 
+	public static void OnClientDisconnect( IClient client, NetworkDisconnectionReason reason )
+	{
+		Current?.ActiveState?.OnClientDisconnect( client, reason );
+	}
+
 	public void SetState( string identifier )
 	{
 		Game.AssertServer();
@@ -35,16 +40,19 @@ public partial class GameLoop : Entity
 		if ( state is null )
 			Log.Error( $"Failed to create unknown state: {identifier}" );
 
-		if ( ActiveState is not null && ActiveState.IsActive )
-			ActiveState.Finish();
+		if ( ActiveState is not null )
+		{
+			if ( ActiveState.IsActive )
+				ActiveState.Finish();
+
+			// enter all current clients into new state
+			foreach ( var client in ActiveState.Clients )
+			{
+				state.OnClientJoined( client );
+			}
+		}
 
 		ActiveState = state;
-
-		// enter all current clients into new state
-		foreach ( var client in Game.Clients )
-		{
-			ActiveState.OnClientJoined( client );
-		}
 
 		ActiveState.Start();
 	}

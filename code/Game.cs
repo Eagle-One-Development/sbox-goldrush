@@ -75,5 +75,6 @@ public partial class GoldRushGameManager : GameManager
 	{
 		base.ClientDisconnect( client, reason );
 		Chat.AddChatEntry( To.Everyone, client.Name, "left the game", client.SteamId, true );
+		GameLoop.OnClientDisconnect( client, reason );
 	}
 }
