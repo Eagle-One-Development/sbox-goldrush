@@ -35,7 +35,7 @@ public partial class NexusEntity : AnimatedEntity
 			return;
 
 		SceneObject.Batchable = false;
-		SceneObject.Attributes.Set( "gr_team_tint", Team.Color );
+		SceneObject.Attributes.Set( "gr_team_tint", Health > 0 ? Team.Color : Color.Black );
 	}
 
 	[Event.Client.Frame]
