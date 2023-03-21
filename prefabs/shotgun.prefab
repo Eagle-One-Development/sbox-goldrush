@@ -1,0 +1,201 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "3990ab55-9606-408a-bb93-57f64c18ec24",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "700054d5-a04c-487c-af82-af9adb4274fb",
+        "Class": "Aim",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022Aim\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "65516b59-a01c-4c90-8974-15f09a59e71e",
+        "Class": "AmmoComponent",
+        "Keys": {
+          "ClipSize": {
+            "Type": "Int32",
+            "Value": "6"
+          },
+          "Type": {
+            "Type": "AmmoType",
+            "Value": "\u0022Shotgun\u0022"
+          },
+          "_name": {
+            "Value": "\u0022AmmoComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "ReloadTime": {
+            "Type": "Single",
+            "Value": "2.5"
+          }
+        }
+      },
+      {
+        "Guid": "49bba73f-a568-4b05-a867-caf3b3810ca4",
+        "Class": "Purchasable",
+        "Keys": {
+          "Cost": {
+            "Type": "Int32",
+            "Value": "120"
+          },
+          "_name": {
+            "Value": "\u0022Purchasable\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "02a3def5-d6cf-4738-947b-cdcafbe36295",
+        "Class": "ViewModelComponent",
+        "Keys": {
+          "WalkCycleOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "BobAmount": {
+            "Type": "Vector2",
+            "Value": "\u00220,0\u0022"
+          },
+          "SprintPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "SprintAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u002210,10,-10\u0022"
+          },
+          "GlobalPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "GlobalAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "OverallWeight": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "WeightReturnForce": {
+            "Type": "Single",
+            "Value": "100"
+          },
+          "WeightDamping": {
+            "Type": "Single",
+            "Value": "10"
+          },
+          "AccelerationDamping": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "VelocityScale": {
+            "Type": "Single",
+            "Value": "0.5"
+          },
+          "CrouchPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "CrouchAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "ViewModelPath": {
+            "Type": "String",
+            "Value": "\u0022models/viewmodel/sf_pistol_viewmodel.vmdl\u0022"
+          },
+          "_name": {
+            "Value": "\u0022ViewModelComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "40716393-aff5-41ac-900c-3d25e414c599",
+        "Class": "PrimaryFire",
+        "Keys": {
+          "Recoil": {
+            "Type": "Vector2",
+            "Value": "\u00220,0\u0022"
+          },
+          "FireDelay": {
+            "Type": "Single",
+            "Value": "0.7"
+          },
+          "BaseDamage": {
+            "Type": "Single",
+            "Value": "15"
+          },
+          "BulletRange": {
+            "Type": "Single",
+            "Value": "800"
+          },
+          "BulletForce": {
+            "Type": "Single",
+            "Value": "100"
+          },
+          "BulletSize": {
+            "Type": "Single",
+            "Value": "2"
+          },
+          "BulletSpread": {
+            "Type": "Single",
+            "Value": "0.3"
+          },
+          "BulletCount": {
+            "Type": "Int32",
+            "Value": "8"
+          },
+          "_name": {
+            "Value": "\u0022PrimaryFire\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/sf_shotgun.vmdl\u0022"
+      },
+      "HoldType": {
+        "Type": "WeaponHoldType",
+        "Value": "\u0022Shotgun\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Shotgun\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      }
+    }
+  }
+}

@@ -78,7 +78,9 @@
           "_name": {
             "Value": "\u0022GlowingComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
