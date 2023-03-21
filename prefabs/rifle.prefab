@@ -58,7 +58,9 @@
           "_name": {
             "Value": "\u0022Rifle Shoot\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       },
       {
@@ -80,7 +82,9 @@
           "_name": {
             "Value": "\u0022Rifle Ammo\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       },
       {
@@ -94,7 +98,9 @@
           "_name": {
             "Value": "\u0022Purchasable\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       },
       {
@@ -104,7 +110,9 @@
           "_name": {
             "Value": "\u0022Aim\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       },
       {
@@ -170,7 +178,9 @@
           "_name": {
             "Value": "\u0022Rifle Viewmodel\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -199,7 +209,9 @@
       "_scale": {
         "Value": "1"
       },
-      "_tags": {}
+      "_tags": {
+        "Value": "\u0022\u0022"
+      }
     }
   }
 }

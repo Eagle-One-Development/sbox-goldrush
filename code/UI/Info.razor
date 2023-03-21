@@ -16,11 +16,17 @@
             i++;
             <cell class="with-center with-padding-large with-gap @(weapon == Weapon ? "active" : "")">
                 <label class="with-subheader id">@i</label>
-                <label class="with-text name">@weapon.Name</label>
+                <label class="with-subheader name">@weapon.Name</label>
                 <!--show ammo for active weapon-->
                 @if(weapon==Weapon) 
                 {
-                    <label class="with-description ammo">@FormatAmmo()</label>
+                    @if(weapon.HasAmmo())
+                    {
+                        <div class="ammo">
+                            <label class="with-subheader clip" text="@FormatClip()"/>
+                            <label class="with-subheader reserve" text="/ @FormatReserve()"/>
+                        </div>    
+                    }
                 }
             </cell>
         }
@@ -34,18 +40,18 @@
     public Weapon Weapon => Player?.ActiveWeapon;
     public Inventory Inventory => Player.Inventory;
 
-    private string FormatAmmo()
+    private string FormatClip()
     {
-        if (!Weapon.HasAmmo())
-            return "";
-
         var clip = Weapon.GetAmmo();
+        return $"{clip}";
+    }
 
+    private string FormatReserve()
+    {
         var ammoType = Weapon.GetAmmoType();
 
         var reserve = Player.Ammo.GetAmmo(ammoType);
-
-        return $"{clip} / {reserve}";
+        return $"{reserve}";
     }
 
     protected override int BuildHash()

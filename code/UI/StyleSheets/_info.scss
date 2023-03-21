@@ -1,29 +1,37 @@
-Info
-{
+Info {
     position: absolute;
     bottom: 64px;
     right: 64px;
-    width: 200px;
+    width: 240px;
     flex-direction: column-reverse;
 
-    cell
-    {
+    cell {
         transition: all 0.2s ease;
 
-        &.active
-        {
+        &.active {
             padding: 16px;
 
-            .name
-            {
+            .name {
                 color: white;
                 font-size: 24px;
             }
         }
 
-        .id
-        {
+        .id {
             font-size: 12px;
+        }
+
+        .ammo {
+            align-self: center;
+
+            .clip {
+                font-size: 18px;
+            }
+
+            .reserve {
+                font-size: 12px;
+                align-self: flex-end;
+            }
         }
     }
 }

@@ -168,6 +168,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "FireSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/pistol/sf_pistol.shoot.sound\u0022"
           }
         }
       }
