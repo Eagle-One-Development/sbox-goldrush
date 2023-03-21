@@ -32,6 +32,12 @@ public partial class GameLoop : Entity
 		Current?.ActiveState?.OnClientDisconnect( client, reason );
 	}
 
+	public static void OnPawnKilled( Entity pawn )
+	{
+		if ( pawn is not Player player ) return;
+		Current?.ActiveState?.OnPlayerKilled( player );
+	}
+
 	public void SetState( string identifier )
 	{
 		Game.AssertServer();

@@ -48,6 +48,11 @@ public partial class GameState : Entity
 		Clients.Remove( client );
 	}
 
+	public virtual void OnPlayerKilled( Player player )
+	{
+
+	}
+
 	DisplayInfo? displayInfo;
 	public DisplayInfo DisplayInfo
 	{

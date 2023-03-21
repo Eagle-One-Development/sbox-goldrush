@@ -269,9 +269,9 @@ public partial class Player : AnimatedEntity
 		attackingPlayer.RunGameEvent( "player.diddamage", isKill );
 	}
 
-	private async void AsyncRespawn()
+	public async void RespawnAsync( float delay = 5f )
 	{
-		await GameTask.DelaySeconds( 3f );
+		await GameTask.DelaySeconds( delay );
 
 		if ( !CanRespawn() )
 			return;
@@ -283,6 +283,8 @@ public partial class Player : AnimatedEntity
 	{
 		if ( LifeState == LifeState.Alive )
 		{
+			GameManager.Current?.OnKilled( this );
+
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
 				LastDamage.BoneIndex, LastDamage.HasTag( "bullet" ), LastDamage.HasTag( "blast" ) );
 
@@ -300,7 +302,7 @@ public partial class Player : AnimatedEntity
 				.ToList()
 				.ForEach( x => x.EnableDrawing = false );
 
-			AsyncRespawn();
+			RespawnAsync();
 		}
 	}
 

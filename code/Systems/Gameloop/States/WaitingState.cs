@@ -24,8 +24,6 @@ public partial class WaitingState : GameState
 	{
 		base.OnClientJoined( client );
 
-		Log.Info( $"{client} joined" );
-
 		if ( Clients.Count == MinimumPlayers )
 			_timeSinceMinimumPlayers = 0;
 

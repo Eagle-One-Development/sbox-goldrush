@@ -9,18 +9,32 @@ public class MainGameState : GameState
 	{
 		base.OnClientJoined( client );
 
-		if ( client.Pawn is not Player player )
-			return;
+		if ( client.Pawn is not Player player ) return;
 
-		// respawn players at start of new round and give them weapons
-		player.Respawn();
-		player.GiveLoadout();
+		if ( IsActive )
+			player.RespawnAsync( 3 );
 	}
 
 	public override void OnStart()
 	{
 		base.OnStart();
 
+		foreach ( var client in Game.Clients )
+		{
+			if ( client.Pawn is not Player player ) continue;
+			player.Respawn();
+			player.GiveLoadout();
+		}
+
 		NexusEntity.ResetAll();
+	}
+
+	public override void OnPlayerKilled( Player player )
+	{
+		base.OnPlayerKilled( player );
+
+		if ( player.CanRespawn() ) return;
+
+
 	}
 }

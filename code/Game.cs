@@ -77,4 +77,11 @@ public partial class GoldRushGameManager : GameManager
 		Chat.AddChatEntry( To.Everyone, client.Name, "left the game", client.SteamId, true );
 		GameLoop.OnClientDisconnect( client, reason );
 	}
+
+	public override void OnKilled( Entity pawn )
+	{
+		base.OnKilled( pawn );
+
+		GameLoop.OnPawnKilled( pawn );
+	}
 }
