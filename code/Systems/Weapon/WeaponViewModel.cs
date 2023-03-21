@@ -23,6 +23,16 @@ public partial class WeaponViewModel : AnimatedEntity
 		Weapon = weapon;
 	}
 
+	[Event.Client.Frame]
+	public void Frame()
+	{
+		if ( SceneObject is null )
+			return;
+
+		SceneObject.Batchable = false;
+		SceneObject.Attributes.Set( "gr_team_tint", Weapon.Player.Team.Resource.Color );
+	}
+
 	protected override void OnDestroy()
 	{
 		Current = null;

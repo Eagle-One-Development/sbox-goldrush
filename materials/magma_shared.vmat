@@ -34,9 +34,9 @@ Layer0
 
 	//---- Self Illum ----
 	g_flSelfIllumAlbedoFactor "1.000"
-	g_flSelfIllumBrightness "2.000"
-	g_flSelfIllumScale "1.000"
-	g_vSelfIllumScrollSpeed "[-0.100 -0.050]"
+	g_flSelfIllumBrightness "8.000"
+	g_flSelfIllumScale "0.200"
+	g_vSelfIllumScrollSpeed "[0.000 0.000]"
 	g_vSelfIllumTint "[1.000000 1.000000 1.000000 1.000000]"
 	TextureSelfIllumMask "[1.000000 1.000000 1.000000 0.000000]"
 

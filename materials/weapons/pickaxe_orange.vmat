@@ -37,9 +37,9 @@ Layer0
 	//---- Self Illum ----
 	g_flSelfIllumAlbedoFactor "1.000"
 	g_flSelfIllumBrightness "8.000"
-	g_flSelfIllumScale "1.000"
+	g_flSelfIllumScale "0.200"
 	g_vSelfIllumScrollSpeed "[0.000 0.000]"
-	g_vSelfIllumTint "[1.000000 0.596078 0.000000 1.000000]"
+	g_vSelfIllumTint "[1.000000 1.000000 1.000000 1.000000]"
 	TextureSelfIllumMask "materials/weapons/pickaxe_orange_selfillum.psd"
 
 	//---- Texture Coordinates ----
@@ -51,6 +51,6 @@ Layer0
 
 	DynamicParams
 	{
-		g_vSelfIllumTint "TeamColor"
+		g_vSelfIllumTint "gr_team_tint"
 	}
 }

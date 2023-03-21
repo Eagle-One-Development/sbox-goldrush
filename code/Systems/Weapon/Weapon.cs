@@ -25,6 +25,16 @@ public partial class Weapon : AnimatedEntity
 		EnableDrawing = false;
 	}
 
+	[Event.Client.Frame]
+	public void Frame()
+	{
+		if ( SceneObject is null || Player is null || Player.Team is null )
+			return;
+
+		SceneObject.Batchable = false;
+		SceneObject.Attributes.Set( "gr_team_tint", Player.Team.Resource.Color );
+	}
+
 	/// <summary>
 	/// Is the player in a state where they can fire a weapon?
 	/// </summary>
