@@ -1,6 +1,6 @@
 {
   "Id": "red",
   "DisplayName": "Red Team",
-  "Color": "1,0,0,1",
+  "Color": "0.56358,0,0,1",
   "ScssClass": "team-red"
 }
