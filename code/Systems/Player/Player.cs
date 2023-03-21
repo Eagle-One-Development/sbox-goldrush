@@ -174,12 +174,14 @@ public partial class Player : AnimatedEntity
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pickaxe.prefab" ) );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pistol.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/smg.prefab" ), false );
+		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/rifle.prefab" ), false );
 
 		Ammo.Clear();
 
 		Ammo.AddAmmo( AmmoType.Generic, 1000 );
 		Ammo.AddAmmo( AmmoType.Pistol, 100 );
 		Ammo.AddAmmo( AmmoType.Smg, 300 );
+		Ammo.AddAmmo( AmmoType.Rifle, 300 );
 	}
 
 	/// <summary>

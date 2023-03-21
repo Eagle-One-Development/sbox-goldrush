@@ -4,7 +4,9 @@ public enum AmmoType
 {
 	Generic,
 	Pistol,
-	Smg
+	Smg,
+	Rifle,
+	Shotgun
 }
 
 public partial class PlayerAmmo : GameComponent<Player>, ISingletonComponent

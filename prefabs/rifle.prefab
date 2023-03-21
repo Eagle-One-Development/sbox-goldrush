@@ -1,0 +1,205 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "41c0cca0-54c2-42c6-9126-7debb3f5b576",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "89c73a61-80c5-44a8-9233-5e95dda6120c",
+        "Class": "PrimaryFire",
+        "Keys": {
+          "Recoil": {
+            "Type": "Vector2",
+            "Value": "\u00220,0\u0022"
+          },
+          "FireDelay": {
+            "Type": "Single",
+            "Value": "0.08"
+          },
+          "BaseDamage": {
+            "Type": "Single",
+            "Value": "22"
+          },
+          "BulletRange": {
+            "Type": "Single",
+            "Value": "2000"
+          },
+          "BulletForce": {
+            "Type": "Single",
+            "Value": "70"
+          },
+          "BulletSize": {
+            "Type": "Single",
+            "Value": "2"
+          },
+          "BulletSpread": {
+            "Type": "Single",
+            "Value": "0.04"
+          },
+          "BulletCount": {
+            "Type": "Int32",
+            "Value": "1"
+          },
+          "FireSound": {
+            "Type": "String",
+            "Value": "\u0022weapons/rust_smg/sounds/rust_smg.shoot.sound\u0022"
+          },
+          "ViewKickbackStrength": {
+            "Type": "Single",
+            "Value": "3"
+          },
+          "ViewKickbackRecoveryScaleFactor": {
+            "Type": "Single",
+            "Value": "20"
+          },
+          "_name": {
+            "Value": "\u0022Rifle Shoot\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "25f58a9d-bb29-4313-8ee2-46df7d69d622",
+        "Class": "AmmoComponent",
+        "Keys": {
+          "Type": {
+            "Type": "AmmoType",
+            "Value": "\u0022Rifle\u0022"
+          },
+          "ReloadTime": {
+            "Type": "Single",
+            "Value": "2"
+          },
+          "ClipSize": {
+            "Type": "Int32",
+            "Value": "30"
+          },
+          "_name": {
+            "Value": "\u0022Rifle Ammo\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "0a4b05b0-671a-4007-9cea-763e4a99c8cd",
+        "Class": "Purchasable",
+        "Keys": {
+          "Cost": {
+            "Type": "Int32",
+            "Value": "200"
+          },
+          "_name": {
+            "Value": "\u0022Purchasable\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "9b6e90d9-2da6-45d0-b621-e187aecd6092",
+        "Class": "Aim",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022Aim\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "56b3c6d6-8a3d-4e65-b30f-2cc9706fec17",
+        "Class": "ViewModelComponent",
+        "Keys": {
+          "WalkCycleOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "BobAmount": {
+            "Type": "Vector2",
+            "Value": "\u00220,0\u0022"
+          },
+          "SprintPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "SprintAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u002210,10,-10\u0022"
+          },
+          "GlobalPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "GlobalAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "WeightDamping": {
+            "Type": "Single",
+            "Value": "10"
+          },
+          "AccelerationDamping": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "VelocityScale": {
+            "Type": "Single",
+            "Value": "0.5"
+          },
+          "OverallWeight": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "WeightReturnForce": {
+            "Type": "Single",
+            "Value": "100"
+          },
+          "CrouchPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "CrouchAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "ViewModelPath": {
+            "Type": "String",
+            "Value": "\u0022models/viewmodel/sf_rifle_viewmodel.vmdl\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Rifle Viewmodel\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/sf_ratrifle.vmdl\u0022"
+      },
+      "HoldType": {
+        "Type": "WeaponHoldType",
+        "Value": "\u0022Rifle\u0022"
+      },
+      "Handedness": {
+        "Type": "WeaponHandedness",
+        "Value": "\u0022Right\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Rifle\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {}
+    }
+  }
+}

@@ -243,7 +243,7 @@
       },
       "Handedness": {
         "Type": "WeaponHandedness",
-        "Value": "\u0022Left\u0022"
+        "Value": "\u0022Right\u0022"
       },
       "ViewModelPath": {
         "Type": "String",
