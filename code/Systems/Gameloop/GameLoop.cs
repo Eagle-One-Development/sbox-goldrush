@@ -95,4 +95,12 @@ public partial class GameLoop : Entity
 		if ( Current.ActiveState.DisplayInfo.ClassName == "waiting" )
 			Current.ActiveState.Finish();
 	}
+
+	[ConCmd.Admin( "gr_gameloop_reset" )]
+	public static void Reset()
+	{
+		Current?.ActiveState?.Delete();
+
+		StartLoop();
+	}
 }

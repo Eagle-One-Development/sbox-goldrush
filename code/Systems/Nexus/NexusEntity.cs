@@ -80,4 +80,14 @@ public partial class NexusEntity : AnimatedEntity
 			LifeState = LifeState.Dead;
 		}
 	}
+
+	public static void ResetAll()
+	{
+		Game.AssertServer();
+		foreach ( var nexus in Entity.All.OfType<NexusEntity>() )
+		{
+			nexus.Health = nexus.MaxHealth;
+			nexus.LifeState = LifeState.Alive;
+		}
+	}
 }

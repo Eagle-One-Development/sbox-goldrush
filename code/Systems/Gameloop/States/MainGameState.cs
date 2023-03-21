@@ -1,4 +1,6 @@
-﻿namespace GoldRush;
+﻿using GoldRush.Nexus;
+
+namespace GoldRush;
 
 [Library( "maingame" )]
 public class MainGameState : GameState
@@ -13,5 +15,7 @@ public class MainGameState : GameState
 		// respawn players at start of new round and give them weapons
 		player.Respawn();
 		player.GiveLoadout();
+
+		NexusEntity.ResetAll();
 	}
 }
