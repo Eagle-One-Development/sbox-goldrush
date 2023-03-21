@@ -20,6 +20,8 @@ public partial class GameLoop : Entity
 
 	public static GameLoop Current;
 
+	public static string State => Current.ActiveState.DisplayInfo.ClassName;
+
 	public static void OnClientJoined( IClient client )
 	{
 		Current?.ActiveState?.OnClientJoined( client );

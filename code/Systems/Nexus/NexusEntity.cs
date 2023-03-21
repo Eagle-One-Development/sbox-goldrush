@@ -62,6 +62,10 @@ public partial class NexusEntity : AnimatedEntity
 			}
 		}
 
+		// bit dirty, maybe get some standard set of enums for main states?
+		if ( GameLoop.State != "maingame" )
+			return;
+
 		Health -= info.Damage;
 		if ( Health <= 0 )
 		{
