@@ -1,6 +1,7 @@
 using GoldRush.Mechanics;
 using GoldRush.Teams;
 using GoldRush.Weapons;
+using Sandbox.Effects;
 
 namespace GoldRush;
 
@@ -162,7 +163,7 @@ public partial class Player : AnimatedEntity
 		Components.Create<PlayerAnimator>();
 		Components.Create<PlayerCamera>();
 
-		//GiveLoadout();
+		ResetLoadout();
 
 		SetupClothing();
 
@@ -170,18 +171,24 @@ public partial class Player : AnimatedEntity
 		ResetInterpolation();
 	}
 
-	public void GiveLoadout()
+	public void ResetLoadout()
 	{
 		var inventory = Components.Create<Inventory>();
 		inventory.Clear();
+
+		Ammo.Clear();
+	}
+
+	public void GiveLoadout()
+	{
+		ResetLoadout();
+		var inventory = Components.Create<Inventory>();
 
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pickaxe.prefab" ) );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pistol.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/smg.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/rifle.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/shotgun.prefab" ), false );
-
-		Ammo.Clear();
 
 		Ammo.AddAmmo( AmmoType.Generic, 1000 );
 		Ammo.AddAmmo( AmmoType.Pistol, 100 );
@@ -248,9 +255,11 @@ public partial class Player : AnimatedEntity
 			SetAudioEffect( To.Single( Client ), "flashbang", info.Damage.LerpInverse( 0, 60 ) );
 		}
 
-		this.ProceduralHitReaction( info );
-
 		if ( Health <= 0 || info.Damage <= 0 ) return;
+
+		// player model flinch
+		this.ProceduralHitReaction( info );
+		// TODO: Screenshake etc?
 
 		Health -= info.Damage;
 
@@ -282,10 +291,13 @@ public partial class Player : AnimatedEntity
 	{
 		await GameTask.DelaySeconds( delay );
 
+		if ( !this.IsValid() ) return;
+
 		if ( !CanRespawn() )
 			return;
 
 		Respawn();
+		GiveLoadout();
 	}
 
 	public override void OnKilled()
@@ -294,17 +306,17 @@ public partial class Player : AnimatedEntity
 		{
 			LifeState = LifeState.Dead;
 
-			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
+			CreateRagdoll( Controller?.Velocity ?? Vector3.Zero, LastDamage.Position, LastDamage.Force,
 				LastDamage.BoneIndex, LastDamage.HasTag( "bullet" ), LastDamage.HasTag( "blast" ) );
 
 			GameManager.Current?.OnKilled( this );
 			EnableAllCollisions = false;
 			EnableDrawing = false;
 
-			Controller.Remove();
-			Animator.Remove();
+			Controller?.Remove();
+			Animator?.Remove();
 			Inventory?.Remove();
-			Camera.Remove();
+			Camera?.Remove();
 
 			// Disable all children as well.
 			Children.OfType<ModelEntity>()
