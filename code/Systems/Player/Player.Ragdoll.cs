@@ -45,7 +45,8 @@ public partial class Player
 
 			if ( body != null )
 			{
-				body.ApplyImpulseAt( forcePos, force * body.Mass * 10 );
+				Log.Info( $"impulse: {force * body.Mass}" );
+				body.ApplyImpulseAt( forcePos, force * body.Mass );
 			}
 			else
 			{

@@ -184,11 +184,11 @@ public partial class Player : AnimatedEntity
 		ResetLoadout();
 		var inventory = Components.Create<Inventory>();
 
-		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pickaxe.prefab" ) );
+		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pickaxe.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/pistol.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/smg.prefab" ), false );
 		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/rifle.prefab" ), false );
-		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/shotgun.prefab" ), false );
+		inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( "prefabs/shotgun.prefab" ), true );
 
 		Ammo.AddAmmo( AmmoType.Generic, 1000 );
 		Ammo.AddAmmo( AmmoType.Pistol, 100 );
@@ -231,6 +231,37 @@ public partial class Player : AnimatedEntity
 	[ConVar.Server( "gr_player_damage_knockback" )]
 	public static bool EnableKnockback { get; set; } = true;
 
+	[ConCmd.Admin( "gr_kick" )]
+	public static void Kick()
+	{
+		Game.AssertServer();
+		var caller = ConsoleSystem.Caller;
+		if ( !caller.IsValid() ) return;
+
+		if ( caller.Pawn is not Player player ) return;
+		var forward = player.EyeRotation.Forward;
+
+		var tr = Trace.Ray( new Ray( player.EyePosition, forward ), 150 )
+			.EntitiesOnly()
+			.UseHitboxes()
+			.WithTag( "player" )
+			.Ignore( player )
+			.Run();
+
+		if ( tr.Hit && tr.Entity is Player target )
+		{
+			target.ApplyKnockback( forward * 500 );
+		}
+
+		//DebugOverlay.TraceResult( tr, 5 );
+	}
+
+	public void ApplyKnockback( Vector3 velocity )
+	{
+		Log.Info( $"knockback: {velocity}" );
+		Velocity += velocity;
+	}
+
 	public override void TakeDamage( DamageInfo info )
 	{
 		if ( LifeState != LifeState.Alive )
@@ -267,7 +298,7 @@ public partial class Player : AnimatedEntity
 		Health -= info.Damage;
 
 		if ( EnableKnockback )
-			Velocity += info.Force;
+			ApplyKnockback( info.Force );
 
 		LastAttacker = info.Attacker;
 		LastAttackerWeapon = info.Weapon;

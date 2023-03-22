@@ -68,6 +68,14 @@
           "IsMelee": {
             "Type": "Boolean",
             "Value": "true"
+          },
+          "SprintPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "SprintAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
           }
         }
       },
@@ -89,7 +97,7 @@
           },
           "BulletForce": {
             "Type": "Single",
-            "Value": "2.5"
+            "Value": "150"
           },
           "BulletSize": {
             "Type": "Single",

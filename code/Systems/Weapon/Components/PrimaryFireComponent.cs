@@ -131,7 +131,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 				if ( tr.Hit ) wasHit = true;
 
-				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage )
+				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * force, damage )
 					.UsingTraceResult( tr )
 					.WithAttacker( Player )
 					.WithWeapon( Weapon );
