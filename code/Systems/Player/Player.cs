@@ -228,6 +228,9 @@ public partial class Player : AnimatedEntity
 		Audio.SetEffect( effectName, strength, velocity: 20.0f, fadeOut: 4.0f * strength );
 	}
 
+	[ConVar.Server( "gr_player_damage_knockback" )]
+	public static bool EnableKnockback { get; set; } = true;
+
 	public override void TakeDamage( DamageInfo info )
 	{
 		if ( LifeState != LifeState.Alive )
@@ -262,6 +265,9 @@ public partial class Player : AnimatedEntity
 		// TODO: Screenshake etc?
 
 		Health -= info.Damage;
+
+		if ( EnableKnockback )
+			Velocity += info.Force;
 
 		LastAttacker = info.Attacker;
 		LastAttackerWeapon = info.Weapon;

@@ -149,7 +149,7 @@
           },
           "BulletForce": {
             "Type": "Single",
-            "Value": "100"
+            "Value": "0.2"
           },
           "BulletSize": {
             "Type": "Single",
