@@ -138,6 +138,8 @@ public partial class Player : AnimatedEntity
 		EnableHitboxes = true;
 		EnableAllCollisions = true;
 
+		Velocity = Vector3.Zero;
+
 		// Re-enable all children.
 		Children.OfType<ModelEntity>()
 			.ToList()
@@ -356,5 +358,11 @@ public partial class Player : AnimatedEntity
 	public static void SetHP( float value )
 	{
 		(ConsoleSystem.Caller.Pawn as Player).Health = value;
+	}
+
+	[ConCmd.Admin( "dmg" )]
+	public static void DoDamage( float dmg )
+	{
+		(ConsoleSystem.Caller.Pawn as Player)?.TakeDamage( DamageInfo.Generic( dmg ) );
 	}
 }
