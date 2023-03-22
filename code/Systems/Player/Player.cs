@@ -132,6 +132,7 @@ public partial class Player : AnimatedEntity
 	/// </summary>
 	public void Respawn()
 	{
+		TimeSinceRespawned = 0;
 		Health = 100;
 		LifeState = LifeState.Alive;
 
@@ -225,7 +226,7 @@ public partial class Player : AnimatedEntity
 	[ClientRpc]
 	public void SetAudioEffect( string effectName, float strength, float velocity = 20f, float fadeOut = 4f )
 	{
-		Audio.SetEffect( effectName, strength, velocity: 20.0f, fadeOut: 4.0f * strength );
+		Audio.SetEffect( effectName, strength, velocity, fadeOut * strength );
 	}
 
 	[ConVar.Server( "gr_player_damage_knockback" )]
@@ -262,12 +263,28 @@ public partial class Player : AnimatedEntity
 		Velocity += velocity;
 	}
 
+	[Net]
+	public TimeSince TimeSinceRespawned { get; set; }
+
+	[ConVar.Server( "gr_player_spawn_protection" )]
+	public static float SpawnProtection { get; set; } = 3;
+
+	public bool CanTakeDamage()
+	{
+		if ( TimeSinceRespawned <= SpawnProtection ) return false;
+
+		return true;
+	}
+
 	public override void TakeDamage( DamageInfo info )
 	{
 		if ( LifeState != LifeState.Alive )
 			return;
 
 		if ( !Team.ShouldTakeDamage( info ) )
+			return;
+
+		if ( !CanTakeDamage() )
 			return;
 
 		// Check for headshot damage
