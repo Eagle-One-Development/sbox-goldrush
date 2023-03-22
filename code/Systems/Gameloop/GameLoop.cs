@@ -1,4 +1,6 @@
 ﻿
+using GoldRush.Nexus;
+
 namespace GoldRush;
 
 public partial class GameLoop : Entity
@@ -87,6 +89,7 @@ public partial class GameLoop : Entity
 	public static void Init()
 	{
 		Game.AssertServer();
+
 		_ = new GameLoop();
 	}
 
@@ -94,6 +97,7 @@ public partial class GameLoop : Entity
 	public static void StartLoop()
 	{
 		Game.AssertServer();
+
 		if ( Current is null )
 			Init();
 
@@ -103,6 +107,8 @@ public partial class GameLoop : Entity
 	[ConCmd.Admin( "gr_gameloop_skip_waiting" )]
 	public static void SkipWaiting()
 	{
+		Game.AssertServer();
+
 		if ( Current.ActiveState is null )
 			return;
 
@@ -113,8 +119,56 @@ public partial class GameLoop : Entity
 	[ConCmd.Admin( "gr_gameloop_reset" )]
 	public static void Reset()
 	{
+		Game.AssertServer();
+
 		Current?.ActiveState?.Delete();
 
 		StartLoop();
+	}
+
+	[ConCmd.Admin( "gr_gameloop_restart" )]
+	public static void Restart()
+	{
+		Game.AssertServer();
+
+		// start new waiting period
+		Reset();
+
+		// skip to maingame
+		SkipWaiting();
+	}
+
+	[ConCmd.Admin( "gr_gameloop_respawn_all" )]
+	public static void RespawnAll()
+	{
+		Game.AssertServer();
+
+		NexusEntity.ResetAll();
+
+		foreach ( var client in Game.Clients.Where( x => x.Pawn is Player ) )
+		{
+			var player = client.Pawn as Player;
+
+			player.Respawn();
+		}
+	}
+
+	public static void FinishWithWin( string teamId )
+	{
+		Game.AssertServer();
+
+		if ( Current is null )
+			return;
+
+		Event.Run( "gameloop.win" );
+		Event.Run( $"gameloop.win.{teamId}" );
+		Chat.AddChatEntry( To.Everyone, "GAME", $"Team {teamId} wins!", "0", true );
+		Reset();
+	}
+
+	[ConCmd.Admin( "gr_gameloop_force_win" )]
+	public static void ForceWin()
+	{
+		FinishWithWin( "null" );
 	}
 }

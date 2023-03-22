@@ -86,6 +86,8 @@ public partial class Player : AnimatedEntity
 	/// </summary>
 	public int Gold => Resources.Gold;
 
+	public bool IsAlive => LifeState == LifeState.Alive;
+
 	/// <summary>
 	/// When the player is first created. This isn't called when a player respawns.
 	/// </summary>
@@ -249,6 +251,11 @@ public partial class Player : AnimatedEntity
 		if ( Health <= 0 || info.Damage <= 0 ) return;
 
 		Health -= info.Damage;
+
+		LastAttacker = info.Attacker;
+		LastAttackerWeapon = info.Weapon;
+		LastDamage = info;
+
 		bool isKill = Health <= 0;
 
 		if ( isKill )
@@ -283,12 +290,12 @@ public partial class Player : AnimatedEntity
 	{
 		if ( LifeState == LifeState.Alive )
 		{
-			GameManager.Current?.OnKilled( this );
+			LifeState = LifeState.Dead;
 
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
 				LastDamage.BoneIndex, LastDamage.HasTag( "bullet" ), LastDamage.HasTag( "blast" ) );
 
-			LifeState = LifeState.Dead;
+			GameManager.Current?.OnKilled( this );
 			EnableAllCollisions = false;
 			EnableDrawing = false;
 
