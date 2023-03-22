@@ -162,7 +162,7 @@ public partial class Player : AnimatedEntity
 		Components.Create<PlayerAnimator>();
 		Components.Create<PlayerCamera>();
 
-		GiveLoadout();
+		//GiveLoadout();
 
 		SetupClothing();
 
@@ -303,7 +303,7 @@ public partial class Player : AnimatedEntity
 
 			Controller.Remove();
 			Animator.Remove();
-			Inventory.Remove();
+			Inventory?.Remove();
 			Camera.Remove();
 
 			// Disable all children as well.
