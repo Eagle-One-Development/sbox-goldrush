@@ -1,18 +1,23 @@
-Players
-{
+Players {
     position: absolute;
     left: 32px;
     top: 32px;
-
     transition: all 0.2s ease;
     transform: scale( 0.95 );
     transform-origin: top left;
-    
     opacity: 0;
 
-    &.open
-    {
+    &.open {
         transform: scale( 1 );
         opacity: 1;
+    }
+
+    .panel {
+        flex-wrap: wrap;
+
+        .players {
+            max-height: 400px;
+            overflow: scroll;
+        }
     }
 }

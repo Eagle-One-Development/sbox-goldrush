@@ -8,13 +8,13 @@
         <label class="with-subheader">Players: @Game.Clients.Count / @Game.Server.MaxPlayers</label>
     </column>
 
-    <column class="with-flex column wrap with-gap" style="max-width: 600px;">
+    <column class="with-flex column wrap with-gap">
         @foreach ( var team in Teams() )
         {
-            <column class="with-flex column with-gap">
+            <column class="with-flex column with-gap panel">
                 <label class="with-header">@team.Key</label>
 
-                <row class="with-flex row with-gap">
+                <row class="with-flex column with-gap wrap players">
                     @foreach ( var player in team )
                     {
                         var cl = player.Client;
@@ -53,6 +53,6 @@
 
     public override void Tick()
     {
-        SetClass( "open", Input.Down( InputButton.Score ) );
+        SetClass( "open", Input.Down( InputButton.Score ) || true );
     }
 }
