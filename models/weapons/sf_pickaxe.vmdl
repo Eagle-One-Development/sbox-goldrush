@@ -48,7 +48,7 @@
 						filename = "models/weapons/src/sf_pickaxe.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 0.01
+						import_scale = 0.025
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -68,8 +68,8 @@
 					{
 						_class = "Bone"
 						name = "hold_r"
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ 0.0, 0.0, 0.0 ]
+						origin = [ 0.0, 1.397414, 5.571991 ]
+						angles = [ 0.0, -60.056023, 0.0 ]
 						do_not_discard = true
 					},
 				]
