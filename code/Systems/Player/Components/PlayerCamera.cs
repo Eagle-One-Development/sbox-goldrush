@@ -90,7 +90,7 @@ public partial class PlayerCamera : EntityComponent<Player>, ISingletonComponent
 		if ( player.Controller.IsMechanicActive<SprintMechanic>() )
 			fovMultiplier = 1.1f;
 
-		if ( player.ActiveWeapon.IsAiming )
+		if ( player.ActiveWeapon?.IsAiming ?? false )
 			fovMultiplier = 0.8f;
 
 		// Interpolate so that FOV transitions smoothly
