@@ -411,7 +411,7 @@ public partial class Player : AnimatedEntity
 
 	protected float GetFootstepVolume()
 	{
-		return Controller.Velocity.WithZ( 0 ).Length.LerpInverse( 0.0f, 200.0f ) * 1f;
+		return Controller?.Velocity.WithZ( 0 ).Length.LerpInverse( 0.0f, 200.0f ) * 1f ?? 0f;
 	}
 
 	[ConCmd.Server( "kill" )]
