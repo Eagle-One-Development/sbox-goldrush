@@ -53,6 +53,8 @@ public partial class GameState : Entity
 
 	}
 
+	public virtual string StateDescription => "";
+
 	DisplayInfo? displayInfo;
 	public DisplayInfo DisplayInfo
 	{

@@ -13,6 +13,9 @@ public partial class WaitingState : GameState
 	[Net]
 	private TimeSince _timeSinceMinimumPlayers { get; set; }
 
+	[Net]
+	private bool Starting { get; set; } = false;
+
 	public override void OnFinish()
 	{
 		base.OnFinish();
@@ -25,12 +28,16 @@ public partial class WaitingState : GameState
 		base.OnClientJoined( client );
 
 		if ( Clients.Count == MinimumPlayers )
+		{
+			Starting = true;
 			_timeSinceMinimumPlayers = 0;
+		}
 
 		if ( client.Pawn is Player player )
 			player.Respawn();
 	}
 
+	public override string StateDescription => $"{(Starting ? $"Starting in {WaitingTime - _timeSinceMinimumPlayers}" : "Waiting for players...")}";
 
 	public override void Update()
 	{
@@ -41,7 +48,10 @@ public partial class WaitingState : GameState
 		DebugOverlay.ScreenText( $"", 8 );
 
 		if ( Clients.Count < MinimumPlayers )
+		{
+			Starting = false;
 			return;
+		}
 
 		if ( _timeSinceMinimumPlayers >= WaitingTime )
 			Finish();

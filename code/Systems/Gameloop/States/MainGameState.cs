@@ -36,6 +36,8 @@ public class MainGameState : GameState
 		TryWin();
 	}
 
+	public override string StateDescription => "Destroy the enemy Nexus.";
+
 	[Event( "nexus.destroy" )]
 	private void TryWin()
 	{

@@ -3,9 +3,13 @@
 @namespace GoldRush
 
 <root class="with-flex column-reverse with-gap with-shadow">
+    <cell class="with-flex column with-center with-padding-large with-gap">
+        <label class="with-subheader">@StateName</label>
+        <label class="with-description">@StateDescription</label>
+    </cell>
     <cell class="with-center with-padding-large with-gap">
         <label class="with-header">@Health</label>
-        <i class="with-header with-icon">monitor_heart</i>
+        <i class="with-header with-icon">favorite</i>
     </cell>
 
     @{
@@ -40,6 +44,9 @@
     public Weapon Weapon => Player?.ActiveWeapon;
     public Inventory Inventory => Player.Inventory;
 
+    public string StateName => GameLoop.Current?.ActiveState?.DisplayInfo.Name ?? "";
+    public string StateDescription => GameLoop.Current?.ActiveState?.StateDescription ?? "";
+
     private string FormatClip()
     {
         var clip = Weapon.GetAmmo();
@@ -56,9 +63,13 @@
 
     protected override int BuildHash()
     {
+        var hash = HashCode.Combine(Player?.Health, Weapon);
+
         if (Weapon.HasAmmo())
-            return HashCode.Combine( Player?.Health, Weapon, Weapon.GetAmmo(), Player.Ammo.GetAmmo( Weapon.GetAmmoType() ) );
-            
-        return HashCode.Combine( Player?.Health, Weapon );
+            hash = HashCode.Combine(hash, Weapon.GetAmmo(), Player.Ammo.GetAmmo(Weapon.GetAmmoType()));
+
+        hash = HashCode.Combine(hash, StateName, StateDescription);
+
+        return hash;
     }
 }
