@@ -52,40 +52,26 @@
 				children = 
 				[
 					{
-						_class = "PhysicsShapeCylinder"
+						_class = "PhysicsMeshFile"
+						name = "nexus"
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						radius = 71.942101
-						point0 = [ 0.870605, 0.267197, 0.00296 ]
-						point1 = [ 0.870605, 0.267197, 9.409363 ]
-					},
-					{
-						_class = "PhysicsShapeCylinder"
-						parent_bone = ""
-						surface_prop = "default"
-						collision_tags = "solid"
-						radius = 58.065231
-						point0 = [ 0.870605, 0.267197, 11.626617 ]
-						point1 = [ 0.870605, 0.267197, 201.718384 ]
-					},
-					{
-						_class = "PhysicsShapeCylinder"
-						parent_bone = ""
-						surface_prop = "default"
-						collision_tags = "solid"
-						radius = 10.115239
-						point0 = [ 66.59655, 0.731551, 36.675705 ]
-						point1 = [ 66.59655, 0.731551, 80.536057 ]
-					},
-					{
-						_class = "PhysicsShapeBox"
-						parent_bone = ""
-						surface_prop = "default"
-						collision_tags = "solid"
-						origin = [ 41.974579, 41.719856, 95.499298 ]
-						angles = [ 0.0, -53.0, 0.0 ]
-						dimensions = [ 45.154907, 16.311649, 197.146729 ]
+						recenter_on_parent_bone = false
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						filename = "models/environment/nexus/src/nexus.fbx"
+						import_scale = 0.3937
+						maxMeshVertices = 0
+						qemError = 0.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},
